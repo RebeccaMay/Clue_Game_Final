@@ -33,8 +33,12 @@ public class IntBoard {
 		return targets;
 	}
 	
-	public Set<BoardCell> getAdjList(){
+	public Set<BoardCell> getAdjList(BoardCell cell){
 		// TODO: Complete Method
+		return null;
+	}
+	
+	public BoardCell getCell(int row, int col){
 		return null;
 	}
 	
