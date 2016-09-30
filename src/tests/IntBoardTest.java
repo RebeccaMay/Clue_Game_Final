@@ -121,7 +121,7 @@ public class IntBoardTest {
 
 //Test for top left corner
 @Test
-public void TargetTestTopLeftCorner(){
+public void targetTestTopLeftCorner(){
 	BoardCell cell = board.getCell(0, 0);
 	board.calcTargets(cell, 5);
 	Set<BoardCell> targets = board.getTargets();
@@ -139,7 +139,7 @@ public void TargetTestTopLeftCorner(){
 
 //Test for bottom right corner
 @Test
-public void TargetTestBottomRightCorner(){
+public void targetTestBottomRightCorner(){
 	BoardCell cell = board.getCell(3, 3);
 	board.calcTargets(cell, 3);
 	Set<BoardCell> targets = board.getTargets();
@@ -154,7 +154,7 @@ public void TargetTestBottomRightCorner(){
 
 //Test for a right edge (1,3)
 @Test
-public void TargetTestRightEdge(){
+public void targetTestRightEdge(){
 	BoardCell cell = board.getCell(1, 3);
 	board.calcTargets(cell, 3);
 	Set<BoardCell> targets = board.getTargets();
@@ -170,7 +170,7 @@ public void TargetTestRightEdge(){
 
 //Test for a left edge[3,0] move 2
 @Test
-public void TargetTestLeftEdge(){
+public void targetTestLeftEdge(){
 	BoardCell cell = board.getCell(3, 0);
 	board.calcTargets(cell, 2);
 	Set<BoardCell> targets = board.getTargets();
@@ -182,7 +182,7 @@ public void TargetTestLeftEdge(){
 
 //Test for second column middle of grid[1,1]
 @Test
-public void TargetTestSecondColumnMiddleGrid(){
+public void targetTestSecondColumnMiddleGrid(){
 	BoardCell cell = board.getCell(1, 1);
 	board.calcTargets(cell, 3);
 	Set<BoardCell> targets = board.getTargets();
@@ -199,7 +199,7 @@ public void TargetTestSecondColumnMiddleGrid(){
 
 //Test for second from last column, middle of grid [2,2]
 @Test
-public void TargetTestLastColumnMiddleGrid(){
+public void targetTestLastColumnMiddleGrid(){
 	BoardCell cell = board.getCell(2, 2);
 	board.calcTargets(cell, 3);
 	Set<BoardCell> targets = board.getTargets();
