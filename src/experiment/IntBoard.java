@@ -24,7 +24,7 @@ public class IntBoard {
 		return;
 	}
 	
-	private void calcTargets(BoardCell start, BoardCell length){
+	public void calcTargets(BoardCell start, int roll){
 		// TODO: Complete Method
 		return;
 	}
