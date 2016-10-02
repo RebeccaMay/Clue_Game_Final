@@ -28,6 +28,4 @@ public class BoardCell {
 	public int getColumn() {
 		return column;
 	}
-	
-
 }

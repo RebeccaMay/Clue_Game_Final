@@ -23,7 +23,7 @@ public class IntBoardTest {
 
 	@Before
 	public void setUp() {
-		board = new IntBoard();
+		board = new IntBoard();		
 		return;
 	}
 
@@ -31,8 +31,9 @@ public class IntBoardTest {
 	// Top Left
 	@Test
 	public void testTopLeftCorner(){
-		BoardCell cell = board.getCell(0,0);
+		BoardCell cell = board.getCell(0,0);		
 		Set<BoardCell> testAdjList = board.getAdjList(cell);
+		System.out.println(testAdjList.size());
 		assertTrue(testAdjList.contains(board.getCell(1,0)));
 		assertTrue(testAdjList.contains(board.getCell(0,1)));
 		assertEquals(2, testAdjList.size());
