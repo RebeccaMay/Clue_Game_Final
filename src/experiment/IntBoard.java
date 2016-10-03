@@ -53,9 +53,51 @@ public class IntBoard {
 	}
 
 	public void calcTargets(BoardCell start, int roll){
-		// TODO: Complete Method
+		
+		// Clear Sets
+		visited.clear();
+		targets.clear();
+		
+		// Add start to visited
+		visited.add(start);
+		
+		findAllTargets(start, roll);
+		
 		return;
 	}
+	
+	public void findAllTargets(BoardCell start, int pathLength){
+		
+		// Get the adjacency list
+		Set<BoardCell> adj;
+		adj = getAdjList(start);
+		
+		for (BoardCell adjCell: adj){
+			
+			// If cell is already visited continue to next cell
+			if (visited.contains(adjCell)){
+				continue;
+			}
+			
+			// Add cell to visited list
+			visited.add(adjCell);
+			
+			// Add cell to targets if path length is 1, or recurse through to the next cell
+			if (pathLength == 1){
+				targets.add(adjCell);
+			}
+			else {
+				findAllTargets(adjCell, pathLength - 1);
+			}
+			
+			// Remove cell from visited list
+			visited.remove(adjCell);
+		}
+		
+		
+		return;
+	}
+	
 
 	public Set<BoardCell> getTargets(){
 		return targets;
