@@ -1,12 +1,10 @@
 package experiment;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
-
 	private Map<BoardCell, Set<BoardCell>> adj;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
@@ -26,6 +24,7 @@ public class IntBoard {
 			}
 		}
 	}
+	
 	/*For this we are simply calculating the cells that a player can move to given
 	 * a cell.  The restrictions are you can't go off the board so this should 
 	 * just be a simple for loop with some if statements.
@@ -59,10 +58,8 @@ public class IntBoard {
 		targets.clear();
 		
 		// Add start to visited
-		visited.add(start);
-		
-		findAllTargets(start, roll);
-		
+		visited.add(start);		
+		findAllTargets(start, roll);		
 		return;
 	}
 	
@@ -70,8 +67,7 @@ public class IntBoard {
 		
 		// Get the adjacency list
 		Set<BoardCell> adj;
-		adj = getAdjList(start);
-		
+		adj = getAdjList(start);		
 		for (BoardCell adjCell: adj){
 			
 			// If cell is already visited continue to next cell
@@ -92,9 +88,7 @@ public class IntBoard {
 			
 			// Remove cell from visited list
 			visited.remove(adjCell);
-		}
-		
-		
+		}	
 		return;
 	}
 	

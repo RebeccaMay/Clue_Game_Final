@@ -10,9 +10,7 @@ import org.junit.Test;
 import experiment.BoardCell;
 import experiment.IntBoard;
 
-/*
- * TODO:
- * Create at least 6 methods to test Target Creation
+/*DONE: Create at least 6 methods to test Target Creation
  * 
  * Done:
  * Created Adjacency Test
@@ -101,7 +99,7 @@ public class IntBoardTest {
 	 * DONE: a right edge[1,3]
 	 * DONE: a left edge[3,0]
 	 * DONE: second column middle of grid[1,1]
-	 * second from last column, middle of grid [2,2]
+	 * DONE: second from last column, middle of grid [2,2]
 	 * This is the outline: 
 	public void testTargets0_3()
 	{
