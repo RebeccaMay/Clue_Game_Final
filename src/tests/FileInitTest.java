@@ -12,6 +12,22 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.DoorDirection;
 
+/*
+ * Done:
+ * Before Test
+ * Rooms Test
+ * Board Dimensions Test
+ * Door Directions Test
+ * Number of Doorways Test
+ * 
+ * TODO:
+ * Finish the test as described on the website
+ * Write Text File, OurText.txt
+ * 
+ * Hand In.
+ *  
+ */
+
 // Very similar setup to Dr. Rader's tests
 public class FileInitTest {
 
@@ -20,7 +36,8 @@ public class FileInitTest {
 	public static final int NUM_COLUMNS = 23;
 
 	private static Board board;
-
+	
+	// Sets up variables
 	@BeforeClass
 	public static void setUp() {
 
@@ -32,7 +49,8 @@ public class FileInitTest {
 
 		return;
 	}
-
+	
+	// Test legend file read for correct rooms
 	@Test
 	public void testRooms() {
 
@@ -54,7 +72,8 @@ public class FileInitTest {
 
 		return;
 	}
-
+	
+	// Test the correct dimensions for the game board
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
@@ -62,6 +81,7 @@ public class FileInitTest {
 		assertEquals(NUM_COLUMNS, board.getNumColumns());
 	}
 
+	// Test directions for each door option, and non-door options
 	@Test
 	public void FourDoorDirections() {
 		BoardCell room = board.getCellAt(7, 3);
@@ -92,7 +112,7 @@ public class FileInitTest {
 		return;
 	}
 
-	// Test that we have the correct number of doors
+	// Test for correct numbers of doors on the board
 	@Test
 	public void testNumberOfDoorways() {
 		int numDoors = 0;
