@@ -18,7 +18,7 @@ public class Board {
 	private Set<BoardCell> targets;
 	
 	private String boardConfigFile;
-	private String roomConfigFIle;
+	private String roomConfigFile;
 	
 	private Board() {
 		// Singleton
@@ -52,5 +52,33 @@ public class Board {
 		
 		return;
 	}
+
+	public void setConfigFiles(String board, String rooms) {
+		
+		boardConfigFile = board;
+		roomConfigFile = rooms;
+		
+		return;
+	}
+
+	public Map<Character, String> getLegend() {
+		
+		return null;
+	}
+
+	public int getNumRows() {
+		return -1;
+	}
+	
+	public int getNumColumns() {
+		return -1;
+	}
+	
+	public BoardCell getCellAt(int r, int c){
+		
+		return null;
+	}
+	
+	
 
 }
