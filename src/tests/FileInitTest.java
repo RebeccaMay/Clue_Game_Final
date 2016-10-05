@@ -21,7 +21,7 @@ import clueGame.DoorDirection;
  * Number of Doorways Test
  * 
  * TODO:
- * Finish the test as described on the website
+ * DONE: Finish the test as described on the website
  * Write Text File, OurText.txt
  * 
  * Hand In.
@@ -129,6 +129,30 @@ public class FileInitTest {
 		}
 		
 		assertEquals(13, numDoors);
+	}
+	
+	//Test a few room cells to ensure the room initial is correct
+	@Test
+	public void testRoomInitials(){
+		//Test different corners of rooms and all rooms
+		assertEquals('L', board.getCellAt(0, 0).getInitial());
+		assertEquals('S', board.getCellAt(0, 14).getInitial());
+		assertEquals('G', board.getCellAt(8, 18).getInitial());
+		assertEquals('E', board.getCellAt(14, 5).getInitial());
+		assertEquals ('L', board.getCellAt(13, 17).getInitial());
+		assertEquals ('M', board.getCellAt(0, 0).getInitial());
+		assertEquals ('B', board.getCellAt(17, 4).getInitial());
+		assertEquals ('A', board.getCellAt(20, 11).getInitial());
+		assertEquals ('C', board.getCellAt(19, 23).getInitial());
+		//Test rooms at the edge of the board
+		assertEquals ('L', board.getCellAt(3, 0).getInitial());
+		assertEquals ('S', board.getCellAt(0, 11).getInitial());
+		assertEquals ('G', board.getCellAt(4, 23).getInitial());
+		assertEquals ('C', board.getCellAt(21, 23).getInitial());
+		//Test Walkway
+		assertEquals ('W', board.getCellAt(20, 14).getInitial());
+		//Test Kafadar
+		assertEquals ('X', board.getCellAt(10, 11).getInitial());		
 	}
 
 }
