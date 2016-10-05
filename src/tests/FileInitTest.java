@@ -84,8 +84,8 @@ public class FileInitTest {
 	// Test directions for each door option, and non-door options
 	@Test
 	public void FourDoorDirections() {
+		
 		BoardCell room = board.getCellAt(7, 3);
-
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.DOWN, room.getDoorDirection());
 

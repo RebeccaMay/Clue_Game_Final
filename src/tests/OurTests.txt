@@ -2,5 +2,17 @@ Hunter Johnson
 Reece Hughes
 
 Test Descriptions:
+For the testRooms function we simply had the same code except for our building names and initials
+are different from Cyndi's tests.
 
+Our testBoardDimensions function is the same except the constants NUM_ROWS, and NUM_COLUMNS are defined 
+as 21, and 23 respectively in our setUp function.
 
+The FourDoorDirections code is the same except for our door locations are different from Cindy's because
+our doors are different from hers.  An example is our down door occurs at location (7, 3) where as her's
+occurs at (4, 3).
+
+The testNumberOfDoorways function is different because we have 13 instead of 16 doors.
+
+The testRoomInitials function in our test tests all of the rooms in different corners and along the edges
+of the board as well.  Obviously this involves different cells from the amazing CR's code.
