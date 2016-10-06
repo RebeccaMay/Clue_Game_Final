@@ -86,6 +86,7 @@ public class Board {
 	}
 
 	public void loadBoardConfig(){
+		//Reads in the file into a string
 		String currentCell = "";
 		FileReader reader = null;
 		try {
@@ -105,9 +106,12 @@ public class Board {
 		//This splits the entire file into an array of strings which are separated by
 		//A comma
 		String [] cellLabels = currentCell.split(",");
-		numColumns = (cellLabels.length / numRows);
+		
+		//Determines number of columns of and initialize board side
+		numColumns = (cellLabels.length / numRows);		
 		board = new BoardCell[numRows][numColumns];
-		System.out.println("Number of rows: " + numRows + " Number of cols " + numColumns);
+		
+		//Puts in all the cells into the array.
 		int counter = 0;
 		DoorDirection doorDirection = DoorDirection.NONE;
 		for(int row = 0; row < numRows;++row){
@@ -129,7 +133,6 @@ public class Board {
 						doorDirection = DoorDirection.NONE;
 					}
 				}
-				System.out.println("Row " + row + "Col: " + col + "Direction: " + doorDirection);
 				BoardCell cell = new BoardCell(row,col,cellLabels[counter].charAt(0),doorDirection);
 				board[row][col] = cell;
 				counter = counter + 1;
