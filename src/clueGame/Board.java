@@ -33,11 +33,12 @@ public class Board {
 		
 	}
 
-	public static Board getInstance() {
+
+	public static Board getInstance(){
 		return boardInstance;
 	}
 
-	public void initialize() {
+	public void initialize(){
 
 		loadRoomConfig();
 		loadBoardConfig();
@@ -83,18 +84,32 @@ public class Board {
 		return;
 	}
 
-	public void loadBoardConfig() {
+	public void loadBoardConfig(){
+		String currentCell = "";
+		FileReader reader = null;
+		try {
+			reader = new FileReader(boardConfigFile);
+		} catch (FileNotFoundException e) {
+			System.out.println("board Configuration File Read Error");
+			e.printStackTrace();
+		}
+		Scanner in = new Scanner(reader);
+		while(in.hasNext()){
+			currentCell = currentCell + in.next();	
+		}
+		
+		
+		
+		return;
+	}
+
+	public void calcAdjacencies(){
 
 		return;
 	}
 
-	public void calcAdjacencies() {
 
-		return;
-	}
-
-	public void calcTargets(BoardCell cell, int pathLength) {
-
+	public void calcTargets(BoardCell cell, int pathLength){
 		return;
 	}
 
@@ -121,5 +136,6 @@ public class Board {
 	public BoardCell getCellAt(int r, int c) {
 		return board[r][c];
 	}
+
 
 }
