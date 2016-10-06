@@ -30,6 +30,8 @@ public class Board {
 	
 	public void initialize(){
 		
+		
+		
 		return;
 	}
 	
@@ -67,16 +69,15 @@ public class Board {
 	}
 
 	public int getNumRows() {
-		return -1;
+		return numRows;
 	}
 	
 	public int getNumColumns() {
-		return -1;
+		return numColumns;
 	}
 	
 	public BoardCell getCellAt(int r, int c){
-		
-		return null;
+		return board[r][c];
 	}
 	
 	
