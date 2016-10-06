@@ -23,6 +23,7 @@ public class IntBoard {
 				grid[i][j] = cell;
 			}
 		}
+		calcAdjacencies();
 	}
 	
 	/*For this we are simply calculating the cells that a player can move to given
@@ -98,7 +99,6 @@ public class IntBoard {
 	}
 
 	public Set<BoardCell> getAdjList(BoardCell cell){
-		calcAdjacencies();
 		return adj.get(cell);
 	}
 
