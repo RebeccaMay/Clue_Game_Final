@@ -122,10 +122,14 @@ public class Board {
 					else if(cellLabels[counter].charAt(1) == 'R'){
 						doorDirection = DoorDirection.RIGHT;
 					}
-					else{
+					else if(cellLabels[counter].charAt(1) == 'L'){
 						doorDirection = DoorDirection.LEFT;
 					}
+					else{
+						doorDirection = DoorDirection.NONE;
+					}
 				}
+				System.out.println("Row " + row + "Col: " + col + "Direction: " + doorDirection);
 				BoardCell cell = new BoardCell(row,col,cellLabels[counter].charAt(0),doorDirection);
 				board[row][col] = cell;
 				counter = counter + 1;
