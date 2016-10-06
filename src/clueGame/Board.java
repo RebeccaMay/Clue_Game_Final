@@ -47,7 +47,6 @@ public class Board {
 	}
 
 	public void loadRoomConfig() {
-		/*
 
 		String room = "";
 		char initial = ' ';
@@ -66,7 +65,7 @@ public class Board {
 		Scanner in = new Scanner(reader);
 
 		while (in.hasNext()) {
-			room = in.next();
+			room = in.nextLine();
 			
 			fields = room.split(",");
 			
@@ -74,14 +73,13 @@ public class Board {
 			initial = fields[0].charAt(0);
 
 			// Get Room
-			room = fields[1];
+			room = fields[1].substring(1, fields[1].length());
+			System.out.println(fields[1]);
 
 			// Add to rooms map
 			rooms.put(initial, room);
 			System.out.println("Added: " + room + ", " + initial + " to map.");
 		}
-		*/
-
 		return;
 	}
 

@@ -46,6 +46,7 @@ public class CR_FileInitTests {
 		// To ensure data is correctly loaded, test retrieving a few rooms 
 		// from the hash, including the first and last in the file and a few others
 		assertEquals("Conservatory", legend.get('C'));
+		
 		assertEquals("Ballroom", legend.get('B'));
 		assertEquals("Billiard room", legend.get('R'));
 		assertEquals("Dining room", legend.get('D'));
