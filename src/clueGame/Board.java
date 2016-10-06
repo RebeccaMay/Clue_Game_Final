@@ -1,6 +1,9 @@
 package clueGame;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Board {
@@ -30,12 +33,29 @@ public class Board {
 	
 	public void initialize(){
 		
+		loadRoomConfig();
+		loadBoardConfig();
+		calcAdjacencies();
 		
 		
 		return;
 	}
 	
 	public void loadRoomConfig(){
+		
+		String currentCell = "";
+		
+		try {
+			FileReader reader = new FileReader(roomConfigFile);
+		} catch (FileNotFoundException e) {
+			System.out.println("Room Configuration File Read Error");
+			e.printStackTrace();
+		}
+		
+		Scanner in = new Scanner(reader);
+		
+		currentCell = in.next;
+		
 		
 		return;
 	}
@@ -64,8 +84,7 @@ public class Board {
 	}
 
 	public Map<Character, String> getLegend() {
-		
-		return null;
+		return rooms;
 	}
 
 	public int getNumRows() {
