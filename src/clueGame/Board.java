@@ -12,7 +12,7 @@ public class Board {
 
 	private static Board boardInstance = new Board();
 
-	private int numRows;
+	private int numRows = 0;
 	private int numColumns;
 	public static int MAX_BOARD_SIZE;
 
@@ -39,15 +39,15 @@ public class Board {
 	}
 
 	public void initialize(){
-
-		loadRoomConfig();
 		loadBoardConfig();
+		loadRoomConfig();
 		calcAdjacencies();
 
 		return;
 	}
 
 	public void loadRoomConfig() {
+		/*
 
 		String room = "";
 		char initial = ' ';
@@ -80,6 +80,7 @@ public class Board {
 			rooms.put(initial, room);
 			System.out.println("Added: " + room + ", " + initial + " to map.");
 		}
+		*/
 
 		return;
 	}
@@ -95,8 +96,42 @@ public class Board {
 		}
 		Scanner in = new Scanner(reader);
 		while(in.hasNext()){
-			currentCell = currentCell + in.next();	
+			currentCell = currentCell + in.next();
+			currentCell = currentCell + ",";
+			numRows = numRows + 1;
 		}
+		in.close();
+		
+		//This splits the entire file into an array of strings which are separated by
+		//A comma
+		String [] cellLabels = currentCell.split(",");
+		numColumns = (cellLabels.length / numRows);
+		board = new BoardCell[numRows][numColumns];
+		System.out.println("Number of rows: " + numRows + " Number of cols " + numColumns);
+		int counter = 0;
+		DoorDirection doorDirection = DoorDirection.NONE;
+		for(int row = 0; row < numRows;++row){
+		for(int col = 0; col < numColumns;++col){
+				if(cellLabels[counter].length() == 2){
+					if(cellLabels[counter].charAt(1) == 'U'){
+						doorDirection = DoorDirection.UP;
+					}
+					else if(cellLabels[counter].charAt(1) == 'D'){
+						doorDirection = DoorDirection.DOWN;
+					}
+					else if(cellLabels[counter].charAt(1) == 'R'){
+						doorDirection = DoorDirection.RIGHT;
+					}
+					else{
+						doorDirection = DoorDirection.LEFT;
+					}
+				}
+				BoardCell cell = new BoardCell(row,col,cellLabels[counter].charAt(0),doorDirection);
+				board[row][col] = cell;
+				counter = counter + 1;
+			}
+		}
+		
 		
 		
 		
@@ -133,8 +168,8 @@ public class Board {
 		return numColumns;
 	}
 
-	public BoardCell getCellAt(int r, int c) {
-		return board[r][c];
+	public BoardCell getCellAt(int row, int col) {
+		return board[row][col];
 	}
 
 
