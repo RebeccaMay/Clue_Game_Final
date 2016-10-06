@@ -10,30 +10,33 @@ public class BoardCell {
 	private boolean room = false;
 	private boolean doorway = false;
 
-	public BoardCell(int row, int column, char initial) {
+	public BoardCell(int row, int column, char initial,DoorDirection door) {
 		super();
 		this.row = row;
 		this.column = column;
 		this.initial = initial;
-		
-		
-		
+		this.door = door;
+		if(initial == 'W') {
+			walkway = true;
+		}
+		else if(door != DoorDirection.NONE){
+			doorway = true;
+		}
+		else{
+			room = true;
+		}		
 	}
 
 	public boolean isWalkway() {
-		if (initial == 'W') {
-			return true;
-		}
-		return false;
+		return walkway;
 	}
 
 	public boolean isRoom() {
-
-		return false;
+		return room;
 	}
 
 	public boolean isDoorway() {
-		return false;
+		return doorway;
 	}
 
 	public DoorDirection getDoorDirection() {
