@@ -39,7 +39,11 @@ public class Board {
 	}
 
 	public void initialize(){
-		loadBoardConfig();
+		try {
+			loadBoardConfig();
+		} catch (BadConfigFormatException e) {
+			e.printStackTrace();
+		}
 		loadRoomConfig();
 		calcAdjacencies();
 
@@ -82,7 +86,7 @@ public class Board {
 		return;
 	}
 
-	public void loadBoardConfig(){
+	public void loadBoardConfig() throws BadConfigFormatException{
 		//Reads in the file into a string
 		String currentCell = "";
 		FileReader reader = null;
@@ -108,9 +112,11 @@ public class Board {
 				currentCell = currentCell.substring(0, i) + currentCell.substring(i + 2);			
 			}
 		}
-		System.out.println(currentCell);
 		String [] cellLabels = currentCell.split(",");
 		numColumns = (cellLabels.length / numRows);
+		if((numRows * numColumns) != cellLabels.length){
+			throw new BadConfigFormatException();
+		}
 		board = new BoardCell[numRows][numColumns];
 		
 		//Puts in all the cells into the array.
