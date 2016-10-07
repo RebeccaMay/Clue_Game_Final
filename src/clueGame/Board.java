@@ -25,6 +25,7 @@ public class Board {
 	private String boardConfigFile;
 	private String roomConfigFile;
 
+	// Private Constructor.  Initializes data structures.
 	private Board() {
 		// Singleton
 		rooms = new HashMap<Character, String>();
@@ -33,11 +34,14 @@ public class Board {
 		
 	}
 
-
+	//  Makes sure only one instance of Board can exist;
 	public static Board getInstance(){
 		return boardInstance;
 	}
+	
+	// Initializes the Board by loading config files and calculating adjacencies
 	public void initialize(){
+		
 		try {
 			loadRoomConfig();
 		} catch (BadConfigFormatException e) {
@@ -53,6 +57,7 @@ public class Board {
 		return;
 	}
 
+	// Takes the room config file loads the rooms
 	public void loadRoomConfig() throws BadConfigFormatException {
 
 		String room = "";
@@ -85,6 +90,7 @@ public class Board {
 			// Add to rooms map
 			rooms.put(initial, room);
 			fields[2] = fields[2].substring(1, fields[2].length());
+			
 			if(!((fields[2].equalsIgnoreCase("card") || (fields[2].equalsIgnoreCase("other"))))){
 				throw new BadConfigFormatException();
 			}
@@ -92,6 +98,7 @@ public class Board {
 		return;
 	}
 
+	// Takes the board config file and loads cells into the board
 	public void loadBoardConfig() throws BadConfigFormatException{
 		//Reads in the file into a string
 		String currentCell = "";
@@ -176,12 +183,30 @@ public class Board {
 
 		return;
 	}
+	
+	// Returns the list of all adjacent cells to cell r, c
+	public Set<BoardCell> getAdjList(int r, int c){
+		
+		return null;
+	}
 
-
+	// Calculates all targets for a cell given the cell and the length of the path
 	public void calcTargets(BoardCell cell, int pathLength){
 		return;
 	}
+	
+	// Calculates all targets for a cell given r, c and the length of the path
+	public void calcTargets(int r, int c, int pathLength){
+		return;
+	}
+	
+	// Returns the list of targets calculated previously
+	public Set<BoardCell> getTargets(){
+		
+		return null;
+	}
 
+	// Sets the config files for the board and rooms.
 	public void setConfigFiles(String board, String rooms) {
 
 		boardConfigFile = "configFiles/" + board;
@@ -190,18 +215,22 @@ public class Board {
 		return;
 	}
 
+	// Returns a map of each room and its initial.
 	public Map<Character, String> getLegend() {
 		return rooms;
 	}
 
+	// Returns the total number of rows on the board.
 	public int getNumRows() {
 		return numRows;
 	}
-
+	
+	// Returns the total number of columns on the board.
 	public int getNumColumns() {
 		return numColumns;
 	}
-
+	
+	// Returns a Board cell at row, column
 	public BoardCell getCellAt(int row, int col) {
 		return board[row][col];
 	}
