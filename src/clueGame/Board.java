@@ -43,13 +43,17 @@ public class Board {
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
 		}
-		loadRoomConfig();
+		try {
+			loadRoomConfig();
+		} catch (BadConfigFormatException e) {
+			e.printStackTrace();
+		}
 		calcAdjacencies();
 
 		return;
 	}
 
-	public void loadRoomConfig() {
+	public void loadRoomConfig() throws BadConfigFormatException {
 
 		String room = "";
 		char initial = ' ';
@@ -81,6 +85,9 @@ public class Board {
 
 			// Add to rooms map
 			rooms.put(initial, room);
+			if((fields[2] != "Card") || (fields[2] != "Other")){
+				throw new BadConfigFormatException();
+			}
 		}
 		return;
 	}
@@ -107,7 +114,7 @@ public class Board {
 		PLEASE NOTE: this next bit of code must be here because the different
 		CSV files read in differently.  Her original one will read in with
 		no commas separating the last entry in each column.  Ours however will
-		put a comma at the end of each row and the begining of each row. */
+		put a comma at the end of each row and the beginning of each row. */
 		
 		//Must remove extra commas from differently formated csv files
 		for(int i = 0; i < currentCell.length() -1;++i){
