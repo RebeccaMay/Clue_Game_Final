@@ -12,7 +12,7 @@ public class Board {
 
 	private static Board boardInstance = new Board();
 
-	private int numRows = 0;
+	private int numRows;
 	private int numColumns;
 	public static int MAX_BOARD_SIZE;
 
@@ -78,7 +78,6 @@ public class Board {
 
 			// Add to rooms map
 			rooms.put(initial, room);
-			System.out.println("Added: " + room + ", " + initial + " to map.");
 		}
 		return;
 	}
@@ -100,13 +99,18 @@ public class Board {
 			numRows = numRows + 1;
 		}
 		in.close();
-		
 		//This splits the entire file into an array of strings which are separated by
 		//A comma
-		String [] cellLabels = currentCell.split(",");
 		
-		//Determines number of columns of and initialize board side
-		numColumns = (cellLabels.length / numRows);		
+		//Must remove extra commas from differently formated csv files
+		for(int i = 0; i < currentCell.length() -1;++i){
+			if((currentCell.charAt(i) == ',') && (currentCell.charAt(i + 1) == ',')){
+				currentCell = currentCell.substring(0, i) + currentCell.substring(i + 2);			
+			}
+		}
+		System.out.println(currentCell);
+		String [] cellLabels = currentCell.split(",");
+		numColumns = (cellLabels.length / numRows);
 		board = new BoardCell[numRows][numColumns];
 		
 		//Puts in all the cells into the array.
@@ -131,6 +135,7 @@ public class Board {
 						doorDirection = DoorDirection.NONE;
 					}
 				}
+				System.out.println(row + " " + col + " " + cellLabels[counter]);
 				BoardCell cell = new BoardCell(row,col,cellLabels[counter].charAt(0),doorDirection);
 				board[row][col] = cell;
 				counter = counter + 1;

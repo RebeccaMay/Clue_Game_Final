@@ -32,8 +32,8 @@ import clueGame.DoorDirection;
 public class FileInitTest {
 
 	public static final int LEGEND_SIZE = 11;
-	public static final int NUM_ROWS = 21;
-	public static final int NUM_COLUMNS = 23;
+	public static final int NUM_ROWS = 22;
+	public static final int NUM_COLUMNS = 24;
 
 	private static Board board;
 	
@@ -77,6 +77,8 @@ public class FileInitTest {
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
+		System.out.println(board.getNumRows());
+		System.out.println(board.getNumColumns());
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());
 	}
@@ -85,19 +87,19 @@ public class FileInitTest {
 	@Test
 	public void FourDoorDirections() {
 		
-		BoardCell room = board.getCellAt(7, 3);
+		BoardCell room = board.getCellAt(6, 3);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.DOWN, room.getDoorDirection());
 
-		room = board.getCellAt(12, 2);
+		room = board.getCellAt(11, 2);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.LEFT, room.getDoorDirection());
 
-		room = board.getCellAt(12, 5);
+		room = board.getCellAt(11, 5);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.RIGHT, room.getDoorDirection());
 
-		room = board.getCellAt(21, 19);
+		room = board.getCellAt(19, 21);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.UP, room.getDoorDirection());
 
@@ -137,10 +139,11 @@ public class FileInitTest {
 		//Test different corners of rooms and all rooms
 		assertEquals('L', board.getCellAt(0, 0).getInitial());
 		assertEquals('S', board.getCellAt(0, 14).getInitial());
-		assertEquals('G', board.getCellAt(8, 18).getInitial());
+		System.out.println(board.getCellAt(8, 19).getInitial());
+		assertEquals('G', board.getCellAt(8, 19).getInitial());
 		assertEquals('E', board.getCellAt(14, 5).getInitial());
-		assertEquals ('L', board.getCellAt(13, 17).getInitial());
-		assertEquals ('M', board.getCellAt(0, 0).getInitial());
+		assertEquals ('M', board.getCellAt(13, 17).getInitial());
+		assertEquals ('L', board.getCellAt(0, 0).getInitial());
 		assertEquals ('B', board.getCellAt(17, 4).getInitial());
 		assertEquals ('A', board.getCellAt(20, 11).getInitial());
 		assertEquals ('C', board.getCellAt(19, 23).getInitial());
