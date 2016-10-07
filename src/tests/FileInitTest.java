@@ -77,8 +77,6 @@ public class FileInitTest {
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
-		System.out.println(board.getNumRows());
-		System.out.println(board.getNumColumns());
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());
 	}
@@ -139,7 +137,6 @@ public class FileInitTest {
 		//Test different corners of rooms and all rooms
 		assertEquals('L', board.getCellAt(0, 0).getInitial());
 		assertEquals('S', board.getCellAt(0, 14).getInitial());
-		System.out.println(board.getCellAt(8, 19).getInitial());
 		assertEquals('G', board.getCellAt(8, 19).getInitial());
 		assertEquals('E', board.getCellAt(14, 5).getInitial());
 		assertEquals ('M', board.getCellAt(13, 17).getInitial());

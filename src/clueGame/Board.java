@@ -135,7 +135,6 @@ public class Board {
 						doorDirection = DoorDirection.NONE;
 					}
 				}
-				System.out.println(row + " " + col + " " + cellLabels[counter]);
 				BoardCell cell = new BoardCell(row,col,cellLabels[counter].charAt(0),doorDirection);
 				board[row][col] = cell;
 				counter = counter + 1;
