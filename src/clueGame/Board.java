@@ -39,12 +39,12 @@ public class Board {
 	}
 	public void initialize(){
 		try {
-			loadBoardConfig();
+			loadRoomConfig();
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
 		}
 		try {
-			loadRoomConfig();
+			loadBoardConfig();
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
 		}
@@ -81,11 +81,11 @@ public class Board {
 
 			// Get Room
 			room = fields[1].substring(1, fields[1].length());
-			System.out.println(fields[1]);
 
 			// Add to rooms map
 			rooms.put(initial, room);
-			if((fields[2] != "Card") || (fields[2] != "Other")){
+			fields[2] = fields[2].substring(1, fields[2].length());
+			if(!((fields[2].equalsIgnoreCase("card") || (fields[2].equalsIgnoreCase("other"))))){
 				throw new BadConfigFormatException();
 			}
 		}
@@ -157,6 +157,9 @@ public class Board {
 					}
 				}
 				BoardCell cell = new BoardCell(row,col,cellLabels[counter].charAt(0),doorDirection);
+				if(!rooms.containsKey(cell.getInitial())){
+					throw new BadConfigFormatException();
+				}
 				board[row][col] = cell;
 				counter = counter + 1;
 				doorDirection = DoorDirection.NONE;
