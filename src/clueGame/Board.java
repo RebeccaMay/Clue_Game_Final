@@ -37,7 +37,6 @@ public class Board {
 	public static Board getInstance(){
 		return boardInstance;
 	}
-
 	public void initialize(){
 		try {
 			loadBoardConfig();
@@ -103,8 +102,12 @@ public class Board {
 			numRows = numRows + 1;
 		}
 		in.close();
-		//This splits the entire file into an array of strings which are separated by
-		//A comma
+		/*This splits the entire file into an array of strings which are separated by
+		A comma.
+		PLEASE NOTE: this next bit of code must be here because the different
+		CSV files read in differently.  Her original one will read in with
+		no commas separating the last entry in each column.  Ours however will
+		put a comma at the end of each row and the begining of each row. */
 		
 		//Must remove extra commas from differently formated csv files
 		for(int i = 0; i < currentCell.length() -1;++i){
@@ -112,8 +115,13 @@ public class Board {
 				currentCell = currentCell.substring(0, i) + currentCell.substring(i + 2);			
 			}
 		}
+		//Splits each cells info into a entry in the cellLabels array
 		String [] cellLabels = currentCell.split(",");
 		numColumns = (cellLabels.length / numRows);
+		/*Because if there are incorrect entries the full amount of cells
+		 * will not be read in so if there are an incorrect number of 
+		 * rows to columns this will throw an exception.
+		 * */
 		if((numRows * numColumns) != cellLabels.length){
 			throw new BadConfigFormatException();
 		}
