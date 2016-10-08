@@ -147,11 +147,16 @@ public class BoardAdjTargetTest {
 			
 		board.calcTargets(5, 16, 3);
 		Set<BoardCell> targets= board.getTargets();
-		
 		assertEquals(13, targets.size());
-		
 		// Doors
 		assertTrue(targets.contains(board.getCellAt(4, 18)));
+		assertTrue(targets.contains(board.getCellAt(6, 18)));
+		
+		board.calcTargets(10, 17, 5);
+		targets= board.getTargets();
+		assertEquals(18, targets.size());
+		// Doors
+		assertTrue(targets.contains(board.getCellAt(13, 17)));
 		assertTrue(targets.contains(board.getCellAt(6, 18)));
 		
 		return;
@@ -163,12 +168,16 @@ public class BoardAdjTargetTest {
 		
 		board.calcTargets(20, 15, 1);
 		Set<BoardCell> targets= board.getTargets();
-		
 		assertEquals(1, targets.size());
-		
 		// Single Result
 		assertTrue(targets.contains(board.getCellAt(20, 10)));
 		
+		board.calcTargets(19, 21, 1);
+		targets= board.getTargets();
+		assertEquals(1, targets.size());
+		// Single Result
+		assertTrue(targets.contains(board.getCellAt(18, 21)));
+
 		return;
 	}
 	
