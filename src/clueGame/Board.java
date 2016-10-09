@@ -186,18 +186,23 @@ public class Board {
 	 * */
 	private boolean upWorks(int row, int col){
 		boolean works = true;
+		//Makes sure rooms have no adj's
 		if(board[row][col].isRoom()){
 			works = false;
 		}
+		//Makes sure if the cell is a doorway that the person can only leave the correct direction
 		if(board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.UP)){
 			works = false;
 		}
+		//Checks the edge of board
 		if(row - 1 < 0){
 			works = false;
 		}
+		//Checks to make sure room spaces are added to the board
 		else if(board[row - 1][col].isRoom()){
 			works = false;
 		}
+		//Checks to make sure the doorways are added correctly.
 		else if(board[row - 1][col].isDoorway() && !(board[row - 1][col].getDoorDirection() == DoorDirection.DOWN)){
 			works = false;
 		}
