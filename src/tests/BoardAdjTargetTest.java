@@ -29,12 +29,12 @@ public class BoardAdjTargetTest {
 		Set<BoardCell> testList;
 		
 		// Only Walkways
-		testList = board.getAdjList(5, 2);
+		testList = board.getAdjList(1, 5);
 		assertEquals(4, testList.size());
-		assertTrue(testList.contains(board.getCellAt(5, 1)));
-		assertTrue(testList.contains(board.getCellAt(5, 3)));
-		assertTrue(testList.contains(board.getCellAt(4, 2)));
-		assertTrue(testList.contains(board.getCellAt(6, 2)));
+		assertTrue(testList.contains(board.getCellAt(0, 5)));
+		assertTrue(testList.contains(board.getCellAt(1, 6)));
+		assertTrue(testList.contains(board.getCellAt(1, 4)));
+		assertTrue(testList.contains(board.getCellAt(2, 5)));
 		
 		// Left edge
 		testList = board.getAdjList(11, 0);
@@ -76,6 +76,13 @@ public class BoardAdjTargetTest {
 		assertTrue(testList.contains(board.getCellAt(4, 5)));
 		assertTrue(testList.contains(board.getCellAt(5, 4)));
 		assertTrue(testList.contains(board.getCellAt(3, 4)));
+		
+		//Next to room (no door) 2.
+		testList = board.getAdjList(2, 15);
+		assertEquals(3, testList.size());
+		assertTrue(testList.contains(board.getCellAt(1, 15)));
+		assertTrue(testList.contains(board.getCellAt(3, 15)));
+		assertTrue(testList.contains(board.getCellAt(1, 16)));
 		
 		
 		// Next to room (next to door but not the entrance)
