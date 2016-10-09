@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import experiment.BoardCellExperiment;
 
 public class Board {
 
@@ -181,23 +180,104 @@ public class Board {
 	}
 
 	/*This function should be the same as the intBoard tests except for the following.
-	 * 
+	 * Don't add rooms to the adjacency list.
+	 * Add doorWays to adjacency lists if the door is in the correct direction.
+	 * I am making private functions to make this more readable
 	 * */
+	private boolean upWorks(int row, int col){
+		boolean works = true;
+		if(board[row][col].isRoom()){
+			works = false;
+		}
+		if(board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.UP)){
+			works = false;
+		}
+		if(row - 1 < 0){
+			works = false;
+		}
+		else if(board[row - 1][col].isRoom()){
+			works = false;
+		}
+		else if(board[row - 1][col].isDoorway() && !(board[row - 1][col].getDoorDirection() == DoorDirection.DOWN)){
+			works = false;
+		}
+		return works;
+	}
+	private boolean downWorks(int row, int col){
+		boolean works = true;
+		if(board[row][col].isRoom()){
+			works = false;
+		}
+		if(board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.DOWN)){
+			works = false;
+		}
+		if(row + 1 >= numRows){
+			works = false;
+		}
+		else if(board[row + 1][col].isRoom()){
+			works = false;
+		}
+		else if(board[row + 1][col].isDoorway() && !(board[row + 1][col].getDoorDirection() == DoorDirection.UP)){
+			works = false;
+		}
+		return works;
+	}
+	private boolean leftWorks(int row, int col){
+		boolean works = true;
+		if(board[row][col].isRoom()){
+			works = false;
+		}
+		if(board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.LEFT)){
+			works = false;
+		}
+		if(col - 1 < 0){
+			works = false;
+		}
+		else if(board[row][col - 1].isRoom()){
+			works = false;
+		}
+		else if(board[row][col - 1].isDoorway() && !(board[row][col - 1].getDoorDirection() == DoorDirection.RIGHT)){
+			works = false;
+		}
+		return works;
+	}
+	private boolean rightWorks(int row, int col){
+		boolean works = true;
+		if(board[row][col].isRoom()){
+			works = false;
+		}
+		if(board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.RIGHT)){
+			works = false;
+		}
+		if(col + 1 >= numColumns){
+			works = false;
+		}
+		else if(board[row][col + 1].isRoom()){
+			works = false;
+		}
+		else if(board[row][col + 1].isDoorway() && !(board[row][col + 1].getDoorDirection() == DoorDirection.LEFT)){
+			works = false;
+		}
+		return works;
+	}
 
+	
+	
+	
 	public void calcAdjacencies(){
 		for(int row = 0; row < numRows; ++row){
 			for(int col = 0; col < numColumns; ++col){
 				HashSet<BoardCell> adjCells = new HashSet<BoardCell>();
-				if((row - 1) >= 0){
+				if(upWorks(row, col)){
 					adjCells.add(board[row-1][col]);					
 				}
-				if((col - 1) >= 0){
+				if(leftWorks(row, col)){
 					adjCells.add(board[row][col - 1]);
 				}
-				if((row + 1) < numRows){
+				if(downWorks(row, col)){
 					adjCells.add(board[row + 1][col]);
 				}
-				if((col + 1) < numColumns){
+				if(rightWorks(row, col)){
 					adjCells.add(board[row][col + 1]);
 				}
 				adjMatrix.put(board[row][col], adjCells);
@@ -208,7 +288,7 @@ public class Board {
 
 	// Returns the list of all adjacent cells to cell r, c
 	public Set<BoardCell> getAdjList(int row, int col){		
-		return null;
+		return adjMatrix.get(board[row][col]);
 	}
 
 	// Calculates all targets for a cell given the cell and the length of the path
@@ -223,7 +303,6 @@ public class Board {
 
 	// Returns the list of targets calculated previously
 	public Set<BoardCell> getTargets(){
-
 		return null;
 	}
 

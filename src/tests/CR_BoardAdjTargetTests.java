@@ -118,6 +118,7 @@ public class CR_BoardAdjTargetTests {
 	{
 		// Test on top edge of board, just one walkway piece
 		Set<BoardCell> testList = board.getAdjList(0, 4);
+		System.out.println(testList.size());
 		assertTrue(testList.contains(board.getCellAt(0, 5)));
 		assertEquals(1, testList.size());
 		
