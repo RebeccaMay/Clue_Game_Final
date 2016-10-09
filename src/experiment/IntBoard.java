@@ -5,21 +5,21 @@ import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
-	private Map<BoardCell, Set<BoardCell>> adj;
-	private Set<BoardCell> visited;
-	private Set<BoardCell> targets;
-	private BoardCell[][] grid;
+	private Map<BoardCellExperiment, Set<BoardCellExperiment>> adj;
+	private Set<BoardCellExperiment> visited;
+	private Set<BoardCellExperiment> targets;
+	private BoardCellExperiment[][] grid;
 	private final int ROWS = 4;
 	private final int COLS = 4;
 
 	public IntBoard() {
-		adj = new HashMap<BoardCell, Set<BoardCell>>();
-		visited = new HashSet<BoardCell>();
-		targets = new HashSet<BoardCell>();	
-		grid = new BoardCell[ROWS][COLS];
+		adj = new HashMap<BoardCellExperiment, Set<BoardCellExperiment>>();
+		visited = new HashSet<BoardCellExperiment>();
+		targets = new HashSet<BoardCellExperiment>();	
+		grid = new BoardCellExperiment[ROWS][COLS];
 		for(int i = 0; i < ROWS; ++i){
 			for(int j = 0; j < COLS; ++j){
-				BoardCell cell = new BoardCell(i,j);
+				BoardCellExperiment cell = new BoardCellExperiment(i,j);
 				grid[i][j] = cell;
 			}
 		}
@@ -33,7 +33,7 @@ public class IntBoard {
 	public void calcAdjacencies(){
 		for(int i = 0; i < ROWS; ++i){
 			for(int j = 0; j < COLS; ++j){
-				HashSet<BoardCell> adjCells = new HashSet<BoardCell>();
+				HashSet<BoardCellExperiment> adjCells = new HashSet<BoardCellExperiment>();
 				if((i - 1) >= 0){
 					adjCells.add(grid[i-1][j]);					
 				}
@@ -52,7 +52,7 @@ public class IntBoard {
 		return;
 	}
 
-	public void calcTargets(BoardCell start, int roll){
+	public void calcTargets(BoardCellExperiment start, int roll){
 		
 		// Clear Sets
 		visited.clear();
@@ -64,12 +64,12 @@ public class IntBoard {
 		return;
 	}
 	
-	public void findAllTargets(BoardCell start, int pathLength){
+	public void findAllTargets(BoardCellExperiment start, int pathLength){
 		
 		// Get the adjacency list
-		Set<BoardCell> adj;
+		Set<BoardCellExperiment> adj;
 		adj = getAdjList(start);		
-		for (BoardCell adjCell: adj){
+		for (BoardCellExperiment adjCell: adj){
 			
 			// If cell is already visited continue to next cell
 			if (visited.contains(adjCell)){
@@ -94,15 +94,15 @@ public class IntBoard {
 	}
 	
 
-	public Set<BoardCell> getTargets(){
+	public Set<BoardCellExperiment> getTargets(){
 		return targets;
 	}
 
-	public Set<BoardCell> getAdjList(BoardCell cell){
+	public Set<BoardCellExperiment> getAdjList(BoardCellExperiment cell){
 		return adj.get(cell);
 	}
 
-	public BoardCell getCell(int row, int col){
+	public BoardCellExperiment getCell(int row, int col){
 		return grid[row][col];
 	}
 	public static void main(String[] args) {

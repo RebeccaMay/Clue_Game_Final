@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import experiment.BoardCellExperiment;
+
 public class Board {
 
 	private static Board boardInstance = new Board();
@@ -31,17 +33,17 @@ public class Board {
 		rooms = new HashMap<Character, String>();
 		adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 		targets = new HashSet<BoardCell>();
-		
+
 	}
 
 	//  Makes sure only one instance of Board can exist;
 	public static Board getInstance(){
 		return boardInstance;
 	}
-	
+
 	// Initializes the Board by loading config files and calculating adjacencies
 	public void initialize(){
-		
+
 		try {
 			loadRoomConfig();
 		} catch (BadConfigFormatException e) {
@@ -53,7 +55,6 @@ public class Board {
 			e.printStackTrace();
 		}
 		calcAdjacencies();
-
 		return;
 	}
 
@@ -63,7 +64,7 @@ public class Board {
 		String room = "";
 		char initial = ' ';
 		String[] fields = new String[3];
-		
+
 		FileReader reader = null;
 
 		try {
@@ -78,9 +79,9 @@ public class Board {
 
 		while (in.hasNext()) {
 			room = in.nextLine();
-			
+
 			fields = room.split(",");
-			
+
 			// Get room initial
 			initial = fields[0].charAt(0);
 
@@ -90,7 +91,7 @@ public class Board {
 			// Add to rooms map
 			rooms.put(initial, room);
 			fields[2] = fields[2].substring(1, fields[2].length());
-			
+
 			if(!((fields[2].equalsIgnoreCase("card") || (fields[2].equalsIgnoreCase("other"))))){
 				throw new BadConfigFormatException();
 			}
@@ -122,7 +123,7 @@ public class Board {
 		CSV files read in differently.  Her original one will read in with
 		no commas separating the last entry in each column.  Ours however will
 		put a comma at the end of each row and the beginning of each row. */
-		
+
 		//Must remove extra commas from differently formated csv files
 		for(int i = 0; i < currentCell.length() -1;++i){
 			if((currentCell.charAt(i) == ',') && (currentCell.charAt(i + 1) == ',')){
@@ -140,12 +141,12 @@ public class Board {
 			throw new BadConfigFormatException();
 		}
 		board = new BoardCell[numRows][numColumns];
-		
+
 		//Puts in all the cells into the array.
 		int counter = 0;
 		DoorDirection doorDirection = DoorDirection.NONE;
 		for(int row = 0; row < numRows;++row){
-		for(int col = 0; col < numColumns;++col){
+			for(int col = 0; col < numColumns;++col){
 				if(cellLabels[counter].length() == 2){
 					if(cellLabels[counter].charAt(1) == 'U'){
 						doorDirection = DoorDirection.UP;
@@ -172,21 +173,41 @@ public class Board {
 				doorDirection = DoorDirection.NONE;
 			}
 		}
-		
-		
-		
-		
+
+
+
+
 		return;
 	}
+
+	/*This function should be the same as the intBoard tests except for the following.
+	 * 
+	 * */
 
 	public void calcAdjacencies(){
-
+		for(int row = 0; row < numRows; ++row){
+			for(int col = 0; col < numColumns; ++col){
+				HashSet<BoardCell> adjCells = new HashSet<BoardCell>();
+				if((row - 1) >= 0){
+					adjCells.add(board[row-1][col]);					
+				}
+				if((col - 1) >= 0){
+					adjCells.add(board[row][col - 1]);
+				}
+				if((row + 1) < numRows){
+					adjCells.add(board[row + 1][col]);
+				}
+				if((col + 1) < numColumns){
+					adjCells.add(board[row][col + 1]);
+				}
+				adjMatrix.put(board[row][col], adjCells);
+			}
+		}
 		return;
 	}
-	
+
 	// Returns the list of all adjacent cells to cell r, c
-	public Set<BoardCell> getAdjList(int r, int c){
-		
+	public Set<BoardCell> getAdjList(int row, int col){		
 		return null;
 	}
 
@@ -194,15 +215,15 @@ public class Board {
 	public void calcTargets(BoardCell cell, int pathLength){
 		return;
 	}
-	
+
 	// Calculates all targets for a cell given r, c and the length of the path
 	public void calcTargets(int r, int c, int pathLength){
 		return;
 	}
-	
+
 	// Returns the list of targets calculated previously
 	public Set<BoardCell> getTargets(){
-		
+
 		return null;
 	}
 
@@ -224,12 +245,12 @@ public class Board {
 	public int getNumRows() {
 		return numRows;
 	}
-	
+
 	// Returns the total number of columns on the board.
 	public int getNumColumns() {
 		return numColumns;
 	}
-	
+
 	// Returns a Board cell at row, column
 	public BoardCell getCellAt(int row, int col) {
 		return board[row][col];

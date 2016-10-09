@@ -12,8 +12,8 @@ public class BoardCell {
 
 	public BoardCell(int row, int column, char initial,DoorDirection door) {
 		super();
-		this.row = 21;
-		this.column = 23;
+		this.row = row;
+		this.column = column;
 		this.initial = initial;
 		this.door = door;
 		if(initial == 'W') {
