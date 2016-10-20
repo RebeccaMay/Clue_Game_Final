@@ -370,8 +370,8 @@ public class Board {
 	// Sets the config files for the board and rooms.
 	public void setConfigFiles(String board, String rooms) {
 
-		boardConfigFile = "configFiles/" + board;
-		roomConfigFile = "configFiles/" + rooms;
+		boardConfigFile = "data/" + board;
+		roomConfigFile = "data/" + rooms;
 
 		return;
 	}

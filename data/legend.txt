@@ -1,0 +1,11 @@
+B, Bouncy Castle, Card
+M, House of Mirrors, Card
+C, Corn Maze, Card
+H, Haunted House, Card
+G, Ring Toss, Card
+Y, Hay Ride, Card
+Z, Petting Zoo, Card
+T, Ticket Booth, Card
+E, Circus Tent, Card
+X, Food Court, Other
+W, Walkway, Other
