@@ -19,7 +19,7 @@ public class BoardAdjTargetTest {
 	@BeforeClass
 	public static void setUp() {
 		board = Board.getInstance();
-		board.setConfigFiles("ClueLayout.csv", "Legend.txt");
+		board.setConfigFiles("ClueLayout.csv", "Legend.txt", "playerData.txt", "weapons.txt");
 		board.initialize();
 	}
 

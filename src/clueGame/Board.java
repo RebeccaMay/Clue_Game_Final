@@ -2,6 +2,7 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -25,8 +26,12 @@ public class Board {
 
 	private String boardConfigFile;
 	private String roomConfigFile;
+	private String playerConfigFile;
+	private String weaponConfigFile;
 
+	
 	private Set<Card> cardDeck;
+	private ArrayList<Player> playerList;
 	
 	// Private Constructor. Initializes data structures.
 	private Board() {
@@ -370,11 +375,12 @@ public class Board {
 	}
 
 	// Sets the config files for the board and rooms.
-	public void setConfigFiles(String board, String rooms) {
+	public void setConfigFiles(String board, String rooms, String players, String weapons) {
 
 		boardConfigFile = "data/" + board;
 		roomConfigFile = "data/" + rooms;
-
+		playerConfigFile = "data/" + players;
+		weaponConfigFile = "data/" + weapons;
 		return;
 	}
 

@@ -43,7 +43,7 @@ public class FileInitTest {
 
 		board = Board.getInstance();
 
-		board.setConfigFiles("ClueLayout.csv", "Legend.txt");
+		board.setConfigFiles("ClueLayout.csv", "Legend.txt", "playerData.txt", "weapons.txt");
 
 		board.initialize();
 
