@@ -26,6 +26,8 @@ public class Board {
 	private String boardConfigFile;
 	private String roomConfigFile;
 
+	private Set<Card> cardDeck;
+	
 	// Private Constructor. Initializes data structures.
 	private Board() {
 		// Singleton
