@@ -412,4 +412,9 @@ public class Board {
 	public Set<Card> getDeck(){
 		return this.cardDeck;
 	}
+	
+	//This getter is for testing only
+	public ArrayList<Player> getPlayerList(){
+		return this.playerList;
+	}
 }
