@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,80 +49,80 @@ public class GameSetupTests {
 	public void loadCardsTest() {		
 		//Checks to see if deck contains every room card
 		
-		for(Card c: board.getDeck()){
-			System.out.println(c);
+		
+		int counter = 0;
+		Card nc;
+		for(Card c: board.getDeck()){		
+			
+			nc = new Card("Bouncy Castle",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("House of Mirrors",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Corn Maze",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Haunted House",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Ring Toss",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Hay Ride",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Petting Zoo",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Ticket Booth",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Circus Tent",CardType.ROOM);
+			if( c.equals(nc)) counter++;
+			
+			//Checks to see if deck contains every weapon
+			nc = new Card("Balloon Animal",CardType.WEAPON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Goat",CardType.WEAPON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Broken Mirror",CardType.WEAPON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Cash Register",CardType.WEAPON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Brass Knuckles",CardType.WEAPON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Elephant Hook",CardType.WEAPON);
+			if( c.equals(nc)) counter++;
+			
+			//Checks for player cards
+			nc = new Card("Chad Bricky",CardType.PERSON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Mary M.",CardType.PERSON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Bozo the Bafoon",CardType.PERSON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Milton Dundershire",CardType.PERSON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("Crystal Sunshine",CardType.PERSON);
+			if( c.equals(nc)) counter++;
+			
+			nc = new Card("LtCdr Dan",CardType.PERSON);
+			if( c.equals(nc)) counter++;
+			
 		}
-		System.out.println(board.getDeck().contains(new Card("Bouncy Castle",CardType.ROOM)));
-		
-		System.out.println(new Card("Bouncy Castle",CardType.ROOM));
-		
-		Card nc = new Card("Bouncy Castle",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("House of Mirrors",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Corn Maze",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Haunted House",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Ring Toss",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Hay Ride",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Petting Zoo",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Ticket Booth",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Circus Tent",CardType.ROOM);
-		assertTrue(board.getDeck().contains(nc));
-		
-		//Checks to see if deck contains every weapon
-		nc = new Card("Balloon Animal",CardType.WEAPON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Goat",CardType.WEAPON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Broken Mirror",CardType.WEAPON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Cash Register",CardType.WEAPON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Brass Knuckles",CardType.WEAPON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Elephant Hook",CardType.WEAPON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		//Checks for player cards
-		nc = new Card("Chad Bricky",CardType.PERSON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Mary M.",CardType.PERSON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Bozo the Bafoon",CardType.PERSON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Milton Dundershire",CardType.PERSON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("Crystal Sunshine",CardType.PERSON);
-		assertTrue(board.getDeck().contains(nc));
-		
-		nc = new Card("LtCdr Dan, Green",CardType.PERSON);
-		assertTrue(board.getDeck().contains(nc));
 		
 		//Checks for total amount of cards (6 people + 6 weapons + 9 rooms)
-		assertEquals(21,board.getDeck().size());
+		assertEquals(21,counter);
 	}
 	
 	

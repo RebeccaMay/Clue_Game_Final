@@ -15,10 +15,8 @@ public class Card {
 	@Override
 	public boolean equals(Object o) {
 		Card c = (Card)o;
-		//return this.cardName.equals(c.cardName);
-		return true;
+		return this.cardName.equals(c.cardName) && this.cardType.equals(c.cardType);
 	}
-	
 	@Override
 	public String toString() {
 		return "Card [cardName=" + cardName + ", cardType=" + cardType + "]";
