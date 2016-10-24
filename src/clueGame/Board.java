@@ -85,6 +85,7 @@ public class Board {
 		}
 		
 		calcAdjacencies();
+		dealCards();
 		return;
 	}
 
@@ -457,7 +458,13 @@ public class Board {
 	}
 
 	public void dealCards(){
-		
+		int playerNum = 0;
+		for (Card c: this.cardDeck){
+			this.playerList.get(playerNum).giveCard(c);
+			
+			playerNum++;
+			if(playerNum >= 6) playerNum = 0;
+		}
 	}
 	
 	//This getter is for testing only

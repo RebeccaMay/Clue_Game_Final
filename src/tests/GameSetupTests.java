@@ -17,6 +17,8 @@ public class GameSetupTests {
 	// We make the Board static because we can load it one time and 
 	// then do all the tests. 
 	private static Board board;
+	
+	//Note, we do an exhastive test for all cards, so they are initialized below and not in setup
 	@BeforeClass
 	public static void setUp() {
 		// Board is singleton, get the only instance and initialize it		
@@ -48,9 +50,7 @@ public class GameSetupTests {
 		
 	@Test
 	public void loadCardsTest() {		
-		//Checks to see if deck contains every room card
-		
-		
+		//Checks to see if deck contains every room card, weapon card, and people card		
 		int counter = 0;
 		Card nc;
 		for(Card c: board.getDeck()){		
