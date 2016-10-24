@@ -71,24 +71,25 @@ public class gameActionTests {
 			else if(pickedCell.equals(board.getCellAt(10, 4))) test2[9] = true;
 			else if(pickedCell.equals(board.getCellAt(11, 5))) test2[10] = true;
 			else if(pickedCell.equals(board.getCellAt(12, 4))) test2[11] = true;
-			else if(pickedCell.equals(board.getCellAt(11, 3))) test2[11] = true;
+			else if(pickedCell.equals(board.getCellAt(11, 3))) test2[12] = true;
 		}
 		//iterate through the test to assert if it is true
 		for(boolean b: test2) assertTrue(b);
+		
 	
 	
 		//Tests to see if there was a room that is in the the range of targets
 		boolean test3 = true;
-		//Instantiate a new computer player at 22, 3
-		testPlayer = new ComputerPlayer("Test Player", "White", 22, 3);
-		board.calcTargets(22, 3, 2);
+		//Instantiate a new computer player at 22, 4
+		testPlayer = new ComputerPlayer("Test Player", "White", 22, 4);
+		board.calcTargets(22, 4, 2);
 		//loop for a large number of times
 		for(int i = 0; i < 10000; i++) {
 			//tell the computer to pick a location based off its current location. Hard code row column
 			BoardCell pickedCell = testPlayer.pickLocation(board.getTargets());
 			//This one should always return the house of mirrors room
 			if(!pickedCell.equals(board.getCellAt(21, 5))) test3 = false; 
-			testPlayer.setLastRoom("None");
+			testPlayer.setLastRoom(' ');
 		}
 		assertTrue(test3);
 		
@@ -103,17 +104,17 @@ public class gameActionTests {
 			BoardCell pickedCell = testPlayer.pickLocation(board.getTargets());
 			//This one should always return the house of mirrors room
 			if(!pickedCell.equals(board.getCellAt(2, 20))) test4 = false; 
-			testPlayer.setLastRoom("None");
+			testPlayer.setLastRoom(' ');
 		}
 		assertTrue(test4);
 		
 		//Tests to see if the room was just visited, can be a random assortment, use previous tests, but extrapolate
 		boolean[] test5 = new boolean[2];
-		//Instantiate a new computer player at 22, 3
-		testPlayer = new ComputerPlayer("Test Player", "White", 22, 3);
+		//Instantiate a new computer player at 22, 4
+		testPlayer = new ComputerPlayer("Test Player", "White", 22, 4);
 		//Set last room name to room in list
-		testPlayer.setLastRoom("House of Mirrors");
-		board.calcTargets(22, 3, 2);
+		testPlayer.setLastRoom('M');
+		board.calcTargets(22, 4, 2);
 		//loop for a large number of times
 		for(int i = 0; i < 10000; i++) {
 			//tell the computer to pick a location based off its current location. Hard code row column
@@ -130,16 +131,16 @@ public class gameActionTests {
 		//Instantiate a new computer player at 2, 22
 		testPlayer = new ComputerPlayer("Test Player", "White", 2, 22);
 		//Set last room name to room in list
-		testPlayer.setLastRoom("House of Mirrors");
+		testPlayer.setLastRoom('M');
 		board.calcTargets(2, 22, 2);
 		//loop for a large number of times
 		for(int i = 0; i < 10000; i++) {
 			//tell the computer to pick a location based off its current location. Hard code row column
 			BoardCell pickedCell = testPlayer.pickLocation(board.getTargets());
 			//This one should always return the house of mirrors room
-			if(pickedCell.equals(board.getCellAt(2, 20))) test5[0] = true;
-			else if(pickedCell.equals(board.getCellAt(0, 22))) test5[1] = true;
-			else if(pickedCell.equals(board.getCellAt(4, 22))) test5[2] = true;
+			if(pickedCell.equals(board.getCellAt(2, 20))) test6[0] = true;
+			else if(pickedCell.equals(board.getCellAt(0, 22))) test6[1] = true;
+			else if(pickedCell.equals(board.getCellAt(4, 22))) test6[2] = true;
 		}
 		for(boolean b: test6) assertTrue(b);
 	}
