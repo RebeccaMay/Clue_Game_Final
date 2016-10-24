@@ -41,6 +41,7 @@ public class Board {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 
+		cardDeck = new HashSet<Card>();
 	}
 
 	// Makes sure only one instance of Board can exist;
@@ -64,6 +65,16 @@ public class Board {
 		
 		try{
 			loadPeopleConfig();
+		}
+		catch (BadConfigFormatException e) {
+			e.printStackTrace();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try{
+			loadWeaponConfig();
 		}
 		catch (BadConfigFormatException e) {
 			e.printStackTrace();
@@ -113,10 +124,14 @@ public class Board {
 			if (!((fields[2].equalsIgnoreCase("card") || (fields[2].equalsIgnoreCase("other"))))) {
 				throw new BadConfigFormatException();
 			}
+			else if(fields[2].equalsIgnoreCase("card")){
+				this.cardDeck.add(new Card(room,CardType.ROOM));
+			}
 		}
 		return;
 	}
 
+	//loads people, adds to playerList and adds people cards to deck
 	public void loadPeopleConfig() throws BadConfigFormatException, FileNotFoundException{
 		this.playerList = new ArrayList<Player>();
 		
@@ -126,6 +141,18 @@ public class Board {
 			String[] strs = in.nextLine().split(", ");
 			if(strs.length != 4) throw new BadConfigFormatException("Improper number of parameters in playerData");
 			this.playerList.add( new Player(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
+			this.cardDeck.add(new Card(strs[0],CardType.PERSON));
+		}
+		in.close();
+	}
+	
+	
+	//loads weapons, places weapon cards within cardDeck
+	public void loadWeaponConfig() throws BadConfigFormatException, FileNotFoundException{		
+		FileReader fr = new FileReader(weaponConfigFile);
+		Scanner in = new Scanner(fr);
+		while(in.hasNextLine()){				
+			this.cardDeck.add( new Card(in.nextLine().trim(),CardType.WEAPON));
 		}
 		in.close();
 	}

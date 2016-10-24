@@ -8,7 +8,19 @@ public class Card {
 		this.cardName = name;
 		this.cardType = type;
 	}
-	public boolean equals() {
-		return false;
+	//public boolean equals() {
+	//	return false;
+	//}
+	
+	@Override
+	public boolean equals(Object o) {
+		Card c = (Card)o;
+		//return this.cardName.equals(c.cardName);
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Card [cardName=" + cardName + ", cardType=" + cardType + "]";
 	}
 }

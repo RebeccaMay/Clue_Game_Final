@@ -44,11 +44,16 @@ public class GameSetupTests {
 	}
 		
 	@Test
-	public void loadCardsTest() {
-		//Checks for total amount of cards (6 people + 6 weapons + 9 rooms)
-		assertEquals(board.getDeck().size(), 21);
-		
+	public void loadCardsTest() {		
 		//Checks to see if deck contains every room card
+		
+		for(Card c: board.getDeck()){
+			System.out.println(c);
+		}
+		System.out.println(board.getDeck().contains(new Card("Bouncy Castle",CardType.ROOM)));
+		
+		System.out.println(new Card("Bouncy Castle",CardType.ROOM));
+		
 		Card nc = new Card("Bouncy Castle",CardType.ROOM);
 		assertTrue(board.getDeck().contains(nc));
 		
@@ -113,6 +118,9 @@ public class GameSetupTests {
 		
 		nc = new Card("LtCdr Dan, Green",CardType.PERSON);
 		assertTrue(board.getDeck().contains(nc));
+		
+		//Checks for total amount of cards (6 people + 6 weapons + 9 rooms)
+		assertEquals(21,board.getDeck().size());
 	}
 	
 	
