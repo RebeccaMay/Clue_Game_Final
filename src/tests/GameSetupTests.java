@@ -35,12 +35,12 @@ public class GameSetupTests {
 		assertEquals(board.getPlayerList().size(), 6);
 		
 		//Checks if playerlist contains players as specified in playerData.txt
-		assertTrue(board.getPlayerList().contains(new Player("Chad Bricky",10,0,"White")));
-		assertTrue(board.getPlayerList().contains(new Player("Mary M.",22,4,"Gold")));
-		assertTrue(board.getPlayerList().contains(new Player("Bozo the Bafoon",6,22,"Orange")));
-		assertTrue(board.getPlayerList().contains(new Player("Milton Dundershire",0, 15,"Gray")));
-		assertTrue(board.getPlayerList().contains(new Player("Crystal Sunshine",0, 0,"Blue")));
-		assertTrue(board.getPlayerList().contains(new Player("LtCdr Dan",11, 11,"Green")));
+		assertTrue(board.getPlayerList().contains(new Player("Chad Bricky","White",10,0)));
+		assertTrue(board.getPlayerList().contains(new Player("Mary M.","Magenta",22,4)));
+		assertTrue(board.getPlayerList().contains(new Player("Bozo the Bafoon","Orange",6,22)));
+		assertTrue(board.getPlayerList().contains(new Player("Milton Dundershire","Gray", 0,15)));
+		assertTrue(board.getPlayerList().contains(new Player("Crystal Sunshine","Blue", 0,0)));
+		assertTrue(board.getPlayerList().contains(new Player("LtCdr Dan","Green", 11,11)));
 	}
 		
 	@Test
@@ -96,6 +96,23 @@ public class GameSetupTests {
 		assertTrue(board.getDeck().contains(nc));
 		
 		//Checks for player cards
+		nc = new Card("Chad Bricky",CardType.PERSON);
+		assertTrue(board.getDeck().contains(nc));
+		
+		nc = new Card("Mary M.",CardType.PERSON);
+		assertTrue(board.getDeck().contains(nc));
+		
+		nc = new Card("Bozo the Bafoon",CardType.PERSON);
+		assertTrue(board.getDeck().contains(nc));
+		
+		nc = new Card("Milton Dundershire",CardType.PERSON);
+		assertTrue(board.getDeck().contains(nc));
+		
+		nc = new Card("Crystal Sunshine",CardType.PERSON);
+		assertTrue(board.getDeck().contains(nc));
+		
+		nc = new Card("LtCdr Dan, Green",CardType.PERSON);
+		assertTrue(board.getDeck().contains(nc));
 	}
 	
 	

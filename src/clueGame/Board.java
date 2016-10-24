@@ -61,6 +61,17 @@ public class Board {
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
 		}
+		
+		try{
+			loadPeopleConfig();
+		}
+		catch (BadConfigFormatException e) {
+			e.printStackTrace();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		calcAdjacencies();
 		return;
 	}
@@ -106,9 +117,18 @@ public class Board {
 		return;
 	}
 
-	//public loadWeaponConfig(){
-	//	
-	//}
+	public void loadPeopleConfig() throws BadConfigFormatException, FileNotFoundException{
+		this.playerList = new ArrayList<Player>();
+		
+		FileReader fr = new FileReader(playerConfigFile);
+		Scanner in = new Scanner(fr);
+		while(in.hasNextLine()){				
+			String[] strs = in.nextLine().split(", ");
+			if(strs.length != 4) throw new BadConfigFormatException("Improper number of parameters in playerData");
+			this.playerList.add( new Player(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
+		}
+		in.close();
+	}
 	
 	// Takes the board config file and loads cells into the board
 	public void loadBoardConfig() throws BadConfigFormatException {

@@ -1,6 +1,6 @@
-Chad Bricky, White, 10, 0 
-Mary M., Gold, 22, 4
+Chad Bricky, White, 10, 0
+Mary M., Magenta, 22, 4
 Bozo the Bafoon, Orange, 6, 22
-Milton Dundershire, Gray, 0, 15 
+Milton Dundershire, Gray, 0, 15
 Crystal Sunshine, Blue, 0, 0
 LtCdr Dan, Green, 11, 11

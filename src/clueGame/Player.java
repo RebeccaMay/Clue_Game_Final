@@ -13,7 +13,7 @@ public class Player {
 	private Set<Card> myCards;
 	private Set<Card> seenCards;
 	
-	public Player(String name, int row, int col, String color){
+	public Player(String name, String color, int row, int col){
 		this.playerName = name;
 		this.row = row;
 		this.column = col;
@@ -26,6 +26,7 @@ public class Player {
 	
 	// Private method for converting string representation of color to actual color object
 	private Color convertColor(String strColor) {
+		strColor = strColor.toLowerCase();
 	    Color color; 
 	    try {     
 	        // We can use reflection to convert the string to a color
@@ -36,4 +37,18 @@ public class Player {
 	    }
 	    return color;
 	}
+
+	@Override
+	public String toString() {
+		return "Player [playerName=" + playerName + ", row=" + row + ", column=" + column + ", color=" + color
+				+"]";
+	}
+	
+	//Had to override the equals method, as the java default failed (when is most certainly should not have)
+	@Override
+	public boolean equals(Object o){
+		Player p = (Player)o;
+		return this.playerName.equals(p.playerName) && this.row == p.row && this.column == p.column && this.color.equals(p.color);
+	}
+	
 }
