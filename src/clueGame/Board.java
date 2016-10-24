@@ -42,6 +42,7 @@ public class Board {
 		visited = new HashSet<BoardCell>();
 
 		cardDeck = new HashSet<Card>();
+		
 	}
 
 	// Makes sure only one instance of Board can exist;
@@ -455,6 +456,10 @@ public class Board {
 		return board[row][col];
 	}
 
+	public void dealCards(){
+		
+	}
+	
 	//This getter is for testing only
 	public Set<Card> getDeck(){
 		return this.cardDeck;

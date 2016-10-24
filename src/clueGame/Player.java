@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.HashSet;
 import java.util.Set;
 import java.lang.reflect.Field;
 
@@ -18,6 +19,9 @@ public class Player {
 		this.row = row;
 		this.column = col;
 		this.color = convertColor(color);
+		
+		this.myCards = new HashSet<Card>();
+		this.seenCards = new HashSet<Card>();
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {
@@ -51,4 +55,13 @@ public class Player {
 		return this.playerName.equals(p.playerName) && this.row == p.row && this.column == p.column && this.color.equals(p.color);
 	}
 	
+	public void giveCard(Card c){
+		myCards.add(c);
+		seenCards.add(c);
+	}
+	
+	//This getter is for testing only
+	public Set<Card> getCards(){
+		return this.myCards;
+	}
 }
