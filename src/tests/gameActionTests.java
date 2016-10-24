@@ -8,6 +8,7 @@ import org.junit.Test;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ComputerPlayer;
+import clueGame.Solution;
 
 public class gameActionTests {
 	// We make the Board static because we can load it one time and 
@@ -143,6 +144,21 @@ public class gameActionTests {
 			else if(pickedCell.equals(board.getCellAt(4, 22))) test6[2] = true;
 		}
 		for(boolean b: test6) assertTrue(b);
+	}
+	@Test
+	public void checkingAccusationTest() {
+		//For testing purposes, set the solution to a constant
+		board.setSolution("Chad Bricky", "Goat", "Corn Maze");
+		
+		//Test the correct solution
+		assertTrue(board.checkAccusation(new Solution("Chad Bricky", "Goat", "Corn Maze")));
+		//Test a wrong name
+		assertFalse(board.checkAccusation(new Solution("Barney", "Goat", "Corn Maze")));
+		//Test a wrong weapon
+		assertFalse(board.checkAccusation(new Solution("Chad Bricky", "Balloon Animal", "Corn Maze")));
+		//Test a wrong room
+		assertFalse(board.checkAccusation(new Solution("Chad Bricky", "Goat", "Ticket Booth")));
+
 	}
 }
 

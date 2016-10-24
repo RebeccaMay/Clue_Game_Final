@@ -2,6 +2,24 @@ package clueGame;
 
 public class Solution {
 	public String person;
-	public String room;
 	public String weapon;
+	public String room;
+	
+	public Solution(String person, String weapon, String room) {
+		super();
+		this.person = person;
+		this.room = room;
+		this.weapon = weapon;
+	}
+
+	public Solution() {
+		// TODO Auto-generated constructor stub
+	}
+
+	//Used to set the values of the Solution for testing,
+	public void setValues(String name, String weapon, String room) {
+		this.person = name;
+		this.weapon = weapon;
+		this.room = room;
+	}
 }

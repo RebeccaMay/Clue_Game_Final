@@ -33,6 +33,8 @@ public class Board {
 	private Set<Card> cardDeck;
 	private ArrayList<Player> playerList;
 	
+	private Solution theAnswer;
+	
 	// Private Constructor. Initializes data structures.
 	private Board() {
 		// Singleton
@@ -42,7 +44,7 @@ public class Board {
 		visited = new HashSet<BoardCell>();
 
 		cardDeck = new HashSet<Card>();
-		
+		theAnswer = new Solution();
 	}
 
 	// Makes sure only one instance of Board can exist;
@@ -467,6 +469,10 @@ public class Board {
 		}
 	}
 	
+	public boolean checkAccusation(Solution accusation){
+		return false;
+	}
+	
 	//This getter is for testing only
 	public Set<Card> getDeck(){
 		return this.cardDeck;
@@ -475,5 +481,11 @@ public class Board {
 	//This getter is for testing only
 	public ArrayList<Player> getPlayerList(){
 		return this.playerList;
+	}
+
+	//For Testing Purposes Only
+	public void setSolution(String name, String weapon, String room) {
+		// TODO Auto-generated method stub
+		this.theAnswer.setValues(name, weapon, room);
 	}
 }
