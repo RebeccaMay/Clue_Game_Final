@@ -470,7 +470,7 @@ public class Board {
 	}
 	
 	public boolean checkAccusation(Solution accusation){
-		return false;
+		return theAnswer.check(accusation);
 	}
 	
 	//This getter is for testing only

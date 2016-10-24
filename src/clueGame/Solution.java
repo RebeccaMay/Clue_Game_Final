@@ -22,4 +22,9 @@ public class Solution {
 		this.weapon = weapon;
 		this.room = room;
 	}
+
+	public boolean check(Solution accusation) {
+		if(accusation.person.equals(this.person) && accusation.weapon.equals(this.weapon) && accusation.room.equals(this.room)) return true;
+		return false;
+	}
 }
