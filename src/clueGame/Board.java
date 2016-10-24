@@ -106,6 +106,10 @@ public class Board {
 		return;
 	}
 
+	//public loadWeaponConfig(){
+	//	
+	//}
+	
 	// Takes the board config file and loads cells into the board
 	public void loadBoardConfig() throws BadConfigFormatException {
 		// Reads in the file into a string
@@ -404,4 +408,8 @@ public class Board {
 		return board[row][col];
 	}
 
+	//This getter is for testing only
+	public Set<Card> getDeck(){
+		return this.cardDeck;
+	}
 }
