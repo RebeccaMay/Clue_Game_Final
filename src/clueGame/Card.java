@@ -22,6 +22,10 @@ public class Card {
 		return "Card [cardName=" + cardName + ", cardType=" + cardType + "]";
 	}
 	
+	public CardType getCardType() {
+		return cardType;
+	}
+	
 	//Testing Getters
 	public String getCardName() {
 		return cardName;

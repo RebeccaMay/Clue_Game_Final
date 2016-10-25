@@ -29,7 +29,10 @@ public class Board {
 	private String playerConfigFile;
 	private String weaponConfigFile;
 
-	
+
+	private Set<Card> peopleDeck;
+	private Set<Card> weaponDeck;
+	private Set<Card> roomDeck;
 	private Set<Card> cardDeck;
 	private ArrayList<Player> playerList;
 	
@@ -44,6 +47,9 @@ public class Board {
 		visited = new HashSet<BoardCell>();
 
 		cardDeck = new HashSet<Card>();
+		peopleDeck = new HashSet<Card>();
+		weaponDeck = new HashSet<Card>();
+		roomDeck = new HashSet<Card>();
 		theAnswer = new Solution();
 	}
 
@@ -129,7 +135,9 @@ public class Board {
 				throw new BadConfigFormatException();
 			}
 			else if(fields[2].equalsIgnoreCase("card")){
-				this.cardDeck.add(new Card(room,CardType.ROOM));
+				Card roomCard = new Card(room,CardType.ROOM);
+				this.cardDeck.add(roomCard);
+				this.roomDeck.add(roomCard);
 			}
 		}
 		return;
@@ -145,7 +153,9 @@ public class Board {
 			String[] strs = in.nextLine().split(", ");
 			if(strs.length != 4) throw new BadConfigFormatException("Improper number of parameters in playerData");
 			this.playerList.add( new Player(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
-			this.cardDeck.add(new Card(strs[0],CardType.PERSON));
+			Card person = new Card(strs[0],CardType.PERSON);
+			this.cardDeck.add(person);
+			this.peopleDeck.add(person);
 		}
 		in.close();
 	}
@@ -155,8 +165,10 @@ public class Board {
 	public void loadWeaponConfig() throws BadConfigFormatException, FileNotFoundException{		
 		FileReader fr = new FileReader(weaponConfigFile);
 		Scanner in = new Scanner(fr);
-		while(in.hasNextLine()){				
-			this.cardDeck.add( new Card(in.nextLine().trim(),CardType.WEAPON));
+		while(in.hasNextLine()){	
+			Card weapon = new Card(in.nextLine().trim(),CardType.WEAPON);
+			this.cardDeck.add(weapon);
+			this.weaponDeck.add(weapon);
 		}
 		in.close();
 	}
@@ -494,5 +506,19 @@ public class Board {
 		// TODO Auto-generated method stub
 		
 	}
+	public Set<Card> getPeopleDeck() {
+		return peopleDeck;
+	}
+
+	public Set<Card> getWeaponDeck() {
+		return weaponDeck;
+	}
+
+	public Set<Card> getRoomDeck() {
+		return roomDeck;
+	}
 	
+	public Map<Character, String> getRoomMap() {
+		return rooms;
+	}
 }

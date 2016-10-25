@@ -208,12 +208,13 @@ public class gameActionTests {
 			if(suggestion.getPerson().equals(person6.getCardName())) test1[2] = true;
 
 			//Check to see if weapon is chosen
-			if(suggestion.getPerson().equals(weapon4.getCardName())) test1[3] = true;
-			if(suggestion.getPerson().equals(weapon5.getCardName())) test1[4] = true;
-			if(suggestion.getPerson().equals(weapon6.getCardName())) test1[5] = true;
+			if(suggestion.getWeapon().equals(weapon4.getCardName())) test1[3] = true;
+			if(suggestion.getWeapon().equals(weapon5.getCardName())) test1[4] = true;
+			if(suggestion.getWeapon().equals(weapon6.getCardName())) test1[5] = true;
 		}
 	
 		for(boolean b: test1) assertTrue(b);
+		
 		
 		//Give player other two weapons and two people.
 		board.forceGiveCard(testPlayer, weapon4);

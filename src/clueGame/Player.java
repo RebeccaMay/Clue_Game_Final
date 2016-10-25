@@ -7,12 +7,12 @@ import java.lang.reflect.Field;
 
 public class Player {
 	private String playerName;
-	private int row;
-	private int column;
+	protected int row;
+	protected int column;
 	private Color color;
 	
-	private Set<Card> myCards;
-	private Set<Card> seenCards;
+	protected Set<Card> myCards;
+	protected Set<Card> seenCards;
 	
 	public Player(String name, String color, int row, int col){
 		this.playerName = name;

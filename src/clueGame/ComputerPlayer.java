@@ -1,5 +1,7 @@
 package clueGame;
 
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -41,8 +43,42 @@ public class ComputerPlayer extends Player {
 	}
 
 	public Solution createSuggestion() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Card> peopleDeck = Board.getInstance().getPeopleDeck();
+		Set<Card> weaponDeck = Board.getInstance().getWeaponDeck();
+		Set<Card> seenPeople = new HashSet<Card>();
+		Set<Card> seenWeapons = new HashSet<Card>();
+		for (Card c: seenCards) {
+			if(c.getCardType() == CardType.PERSON) seenPeople.add(c);
+			if(c.getCardType() == CardType.WEAPON) seenWeapons.add(c);
+		}
+		peopleDeck.removeAll(seenPeople);
+		weaponDeck.removeAll(seenWeapons);
+		String chosenPerson = "";
+		String chosenWeapon = "";
+		int peopleNum = new Random().nextInt(peopleDeck.size());
+		int weaponNum = new Random().nextInt(weaponDeck.size());
+		int iterator = 0;
+		for (Card c: peopleDeck) {
+			if(iterator == peopleNum) {
+				chosenPerson = c.getCardName();
+				break;
+			}
+			iterator += 1;
+		}
+		iterator = 0;
+		for (Card c: weaponDeck) {
+			if(iterator == weaponNum) {
+				chosenWeapon = c.getCardName();
+				break;
+			}
+			iterator += 1;
+		}
+		char roomInitial = Board.getInstance().getCellAt(this.row, this.column).getInitial();
+		Map<Character, String> roomMap = Board.getInstance().getRoomMap();
+		String roomString = roomMap.get(roomInitial);
+		Solution givenSolution = new Solution(chosenPerson, chosenWeapon, roomString);
+		return givenSolution;
+		
 	}
 
 }
