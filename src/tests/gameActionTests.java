@@ -250,7 +250,7 @@ public class gameActionTests {
 		//If computer player gets a suggestion that matches only one card, return that one card.
 		//As the function will have random components, test to make sure it doesn't return randomly
 		for(int i = 0; i < 10000; i++) {
-			assertEquals(testPlayer.disproveSuggestion(new Solution("Chad Bricky", "Broken Mirror", "Corn Maze")), person1);
+			assertEquals(person1, testPlayer.disproveSuggestion(new Solution("Chad Bricky", "Broken Mirror", "Corn Maze")));
 		}
 		
 		//If computer has two or more cards (this case two), make sure at least all cards can be chosen
@@ -268,7 +268,7 @@ public class gameActionTests {
 		//As the function will have random components, test to make sure it doesn't return randomly
 		disprove = new Solution("Mary M.", "Broken Mirror", "Corn Maze");
 		for(int i = 0; i < 10000; i++) {
-			assertEquals(testPlayer.disproveSuggestion(disprove), null);
+			assertEquals(null, testPlayer.disproveSuggestion(disprove));
 		}
 	}
 }
