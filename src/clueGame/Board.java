@@ -504,7 +504,7 @@ public class Board {
 	//For Testing Purposes Only
 	public void forceGiveCard(ComputerPlayer testPlayer, Card cardToGive) {
 		// TODO Auto-generated method stub
-		
+		testPlayer.giveCard(cardToGive);
 	}
 	public Set<Card> getPeopleDeck() {
 		return peopleDeck;

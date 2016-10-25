@@ -1,7 +1,9 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.lang.reflect.Field;
 
@@ -25,6 +27,21 @@ public class Player {
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {
+		ArrayList<Card> availableCardsToDisprove = new ArrayList<Card>();
+		for(Card c: myCards){
+			if(c.getCardName().equals(suggestion.getPerson()) || c.getCardName().equals(suggestion.getRoom()) || c.getCardName().equals(suggestion.getWeapon())){
+				availableCardsToDisprove.add(c);
+			}
+		}
+		if(availableCardsToDisprove.size() == 1) return availableCardsToDisprove.get(0);
+		else if(availableCardsToDisprove.size() > 0) {
+			int itemNum = new Random().nextInt(availableCardsToDisprove.size());
+			int iterator = 0;
+			for (Card c: availableCardsToDisprove) {
+				if(iterator == itemNum) return c;
+				iterator += 1;
+			}
+		}
 		return null;
 	}
 	

@@ -79,6 +79,6 @@ public class ComputerPlayer extends Player {
 		Solution givenSolution = new Solution(chosenPerson, chosenWeapon, roomString);
 		return givenSolution;
 		
-	}
+	}	
 
 }
