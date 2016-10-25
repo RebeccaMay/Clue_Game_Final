@@ -40,4 +40,9 @@ public class ComputerPlayer extends Player {
 		this.lastRoom = lastRoom;
 	}
 
+	public Solution createSuggestion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

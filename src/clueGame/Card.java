@@ -21,4 +21,11 @@ public class Card {
 	public String toString() {
 		return "Card [cardName=" + cardName + ", cardType=" + cardType + "]";
 	}
+	
+	//Testing Getters
+	public String getCardName() {
+		return cardName;
+	}
+	
 }
+

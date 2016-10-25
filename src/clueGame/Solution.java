@@ -27,4 +27,21 @@ public class Solution {
 		if(accusation.person.equals(this.person) && accusation.weapon.equals(this.weapon) && accusation.room.equals(this.room)) return true;
 		return false;
 	}
+	
+	
+	//Testing Getters only
+
+	public String getPerson() {
+		return person;
+	}
+
+	public String getWeapon() {
+		return weapon;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+	
+	
 }

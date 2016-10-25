@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.Solution;
 
@@ -145,6 +147,8 @@ public class gameActionTests {
 		}
 		for(boolean b: test6) assertTrue(b);
 	}
+	
+	//This test
 	@Test
 	public void checkingAccusationTest() {
 		//For testing purposes, set the solution to a constant
@@ -159,6 +163,72 @@ public class gameActionTests {
 		//Test a wrong room
 		assertFalse(board.checkAccusation(new Solution("Chad Bricky", "Goat", "Ticket Booth")));
 
+	}
+	
+	//This test checks the computer player's ability to create a suggestion (not an accusation).
+	@Test
+	public void createSuggestionTest(){
+		//Set up a computer player in a specific room on the layout. In this case, the corn maze.
+		ComputerPlayer testPlayer = new ComputerPlayer("Test Player", "White", 0, 4);
+		//Artificially deal cards to this player, 
+		//Create all the weapon cards 
+		Card weapon1 = new Card("Balloon Animal", CardType.WEAPON);
+		Card weapon2 = new Card("Goat", CardType.WEAPON);
+		Card weapon3 = new Card("Broken Mirror", CardType.WEAPON);
+		Card weapon4 = new Card("Cash Register", CardType.WEAPON);
+		Card weapon5 = new Card("Brass Knuckles", CardType.WEAPON);
+		Card weapon6 = new Card("Elephant Hook", CardType.WEAPON);
+		
+		//Create all the player cards
+		Card person1 = new Card("Chad Bricky",CardType.PERSON);	
+		Card person2 = new Card("Mary M.",CardType.PERSON);		
+		Card person3 = new Card("Bozo the Bafoon",CardType.PERSON);		
+		Card person4 = new Card("Milton Dundershire",CardType.PERSON);		
+		Card person5 = new Card("Crystal Sunshine",CardType.PERSON);		
+		Card person6 = new Card("LtCdr Dan",CardType.PERSON);
+		
+		//Force give the testPlayer 3 weapons and 3 people.
+		board.forceGiveCard(testPlayer, weapon1);
+		board.forceGiveCard(testPlayer, weapon2);
+		board.forceGiveCard(testPlayer, weapon3);
+		board.forceGiveCard(testPlayer, person1);
+		board.forceGiveCard(testPlayer, person2);
+		board.forceGiveCard(testPlayer, person3);
+	
+		//Test to see that suggestion always returns room
+		assertEquals(testPlayer.createSuggestion().getRoom(), "Corn Maze");
+		
+		//Test to make a suggestion that is random between them all
+		boolean[] test1 = new boolean[6];
+		for (int i = 0; i < 10000; i++){
+			Solution suggestion = testPlayer.createSuggestion();
+			//Check to see if person is chosen
+			if(suggestion.getPerson().equals(person4.getCardName())) test1[0] = true;
+			if(suggestion.getPerson().equals(person5.getCardName())) test1[1] = true;
+			if(suggestion.getPerson().equals(person6.getCardName())) test1[2] = true;
+
+			//Check to see if weapon is chosen
+			if(suggestion.getPerson().equals(weapon4.getCardName())) test1[3] = true;
+			if(suggestion.getPerson().equals(weapon5.getCardName())) test1[4] = true;
+			if(suggestion.getPerson().equals(weapon6.getCardName())) test1[5] = true;
+		}
+	
+		for(boolean b: test1) assertTrue(b);
+		
+		//Give player other two weapons and two people.
+		board.forceGiveCard(testPlayer, weapon4);
+		board.forceGiveCard(testPlayer, weapon5);
+		board.forceGiveCard(testPlayer, person4);
+		board.forceGiveCard(testPlayer, person5);
+		
+		//Test to make sure the suggestion is for player6 for weapon6 in the room they are in. 
+		boolean test2 = false;
+		for (int i = 0; i < 10000; i++){
+			Solution suggestion = testPlayer.createSuggestion();
+			//Check to see if person6 and weapon6 is chosen
+			if(!(suggestion.getPerson().equals(person6.getCardName()) && suggestion.getWeapon().equals(weapon6.getCardName()))) test2 = true;
+		}
+		assertTrue(test2);		
 	}
 }
 

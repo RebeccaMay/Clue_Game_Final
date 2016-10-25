@@ -488,4 +488,11 @@ public class Board {
 		// TODO Auto-generated method stub
 		this.theAnswer.setValues(name, weapon, room);
 	}
+
+	//For Testing Purposes Only
+	public void forceGiveCard(ComputerPlayer testPlayer, Card cardToGive) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
