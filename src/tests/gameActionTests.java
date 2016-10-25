@@ -231,6 +231,46 @@ public class gameActionTests {
 		}
 		assertTrue(test2);		
 	}
+	
+	@Test
+	public void testDisproveSuggestion() {
+		//Instantiate a test computer player at 0,0
+		ComputerPlayer testPlayer = new ComputerPlayer("Test Player", "White", 0, 0);
+		
+		//give the player specific cards. Give 2 weapons and 1 person
+		Card weapon1 = new Card("Balloon Animal", CardType.WEAPON);
+		Card weapon2 = new Card("Goat", CardType.WEAPON);
+		Card person1 = new Card("Chad Bricky",CardType.PERSON);
+		
+		//Deal specific cards
+		board.forceGiveCard(testPlayer, weapon1);
+		board.forceGiveCard(testPlayer, weapon2);
+		board.forceGiveCard(testPlayer, person1);
+		
+		//If computer player gets a suggestion that matches only one card, return that one card.
+		//As the function will have random components, test to make sure it doesn't return randomly
+		for(int i = 0; i < 10000; i++) {
+			assertEquals(testPlayer.disproveSuggestion(new Solution("Chad Bricky", "Broken Mirror", "Corn Maze")), person1);
+		}
+		
+		//If computer has two or more cards (this case two), make sure at least all cards can be chosen
+		boolean[] test2 = new boolean[2];
+		Solution disprove = new Solution("Chad Bricky", "Goat", "Corn Maze");
+		for(int i = 0; i < 10000; i++) {
+			if(testPlayer.disproveSuggestion(disprove).equals(person1)) test2[0] = true;
+			if(testPlayer.disproveSuggestion(disprove).equals(weapon2)) test2[0] = true;
+			//Check to see other card in hand not returned
+			if(testPlayer.disproveSuggestion(disprove).equals(weapon1)) fail("Returned Wrong Card");
+		}
+		
+		//If no matching cards found, return null
+		//As it can have random components, check to see it always is null
+		//As the function will have random components, test to make sure it doesn't return randomly
+		disprove = new Solution("Mary M.", "Broken Mirror", "Corn Maze");
+		for(int i = 0; i < 10000; i++) {
+			assertEquals(testPlayer.disproveSuggestion(disprove), null);
+		}
+	}
 }
 
 
