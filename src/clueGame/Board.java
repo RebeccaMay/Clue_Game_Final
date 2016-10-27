@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -9,7 +12,14 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Board extends JPanel{
 
 	private static Board boardInstance = new Board();
 
@@ -52,6 +62,13 @@ public class Board {
 		weaponDeck = new HashSet<Card>();
 		roomDeck = new HashSet<Card>();
 		theAnswer = new Solution();
+		
+		
+		//GUI code
+		setLayout(new GridLayout(2,0));
+		JPanel panel = createTopRow();
+		add(panel);
+		
 	}
 
 	// Makes sure only one instance of Board can exist;
@@ -549,4 +566,58 @@ public class Board {
 	public void setCurrentPlayer(int currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
+	
+	private JPanel createTopRow(){
+		
+		//top row
+		JPanel jp = new JPanel();
+		jp.setLayout(new GridLayout(1,3));
+		
+		//first column in row
+		JPanel whosTurn = new JPanel();
+		//whosTurn.setLayout(new GridLayout(4,1));
+		JLabel label = new JLabel("Whose Turn?",JLabel.CENTER);
+		JTextField hturn = new JTextField("");
+		hturn.setEditable(false);
+		
+		whosTurn.add(label,BorderLayout.NORTH);
+		whosTurn.add(hturn,BorderLayout.SOUTH);
+		/*
+		whosTurn.add(new JPanel());
+		whosTurn.add(label);
+		whosTurn.add(hturn);
+		*/
+		
+		//Second column in row
+		JButton nextPlayer = new JButton("Next Player");
+		nextPlayer.setPreferredSize(new Dimension(150,50));
+		
+		//Third column in row
+		JButton makeAccusation = new JButton("Make Accusation");
+		makeAccusation.setPreferredSize(new Dimension(150,50));
+				
+		jp.add(whosTurn);
+		jp.add(nextPlayer);
+		jp.add(makeAccusation);
+		
+		return jp;
+		
+	}
+	
+	public static void main(String[] args) {
+		Board b = new Board();
+		b.setConfigFiles("Layout.csv", "legend.txt", "playerData.txt", "weapons.txt");
+		b.initialize();
+		
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("GUI Example");
+		frame.setSize(900, 300);	
+		
+		// Create the JPanel and add it to the JFrame
+		frame.add(b);
+		frame.setVisible(true);
+	}
+	
+	
 }
