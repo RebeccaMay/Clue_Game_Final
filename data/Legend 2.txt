@@ -1,0 +1,11 @@
+B, Brown Building, card
+A, Alderson Hall, card
+M, Marquez Hall, card
+C, CTLM, card
+G, Green Center, card
+O, Coolbaugh Hall, card
+S, Stratton, card
+E, Berthoud Hall, card
+L, Library, card
+X, Kafadar, Other
+W, Walkway, Other

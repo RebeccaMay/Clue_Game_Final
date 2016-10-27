@@ -19,7 +19,7 @@ public class ComputerPlayer extends Player {
 		// as a part of the room. Altering the code to include doorways as rooms breaks prior tests, so we used .isDoorway() as
 		// it provides the same functionality (a room isnt' always a doorway, but a doorway is always a room. 
 		for(BoardCell bc: targets) {
-			if(bc.isDoorway() && !(bc.getInitial() == lastRoom)) {
+			if(bc.isRoom() && !(bc.getInitial() == lastRoom)) {
 				lastRoom = bc.getInitial();
 				return bc;
 			}

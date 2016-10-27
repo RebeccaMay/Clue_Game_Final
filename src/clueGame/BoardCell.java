@@ -21,6 +21,7 @@ public class BoardCell {
 		}
 		else if(door != DoorDirection.NONE){
 			doorway = true;
+			room = true;
 		}
 		else{
 			room = true;

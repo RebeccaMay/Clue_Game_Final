@@ -260,7 +260,7 @@ public class Board {
 	private boolean upWorks(int row, int col) {
 		boolean works = true;
 		// Makes sure rooms have no adj's
-		if (board[row][col].isRoom()) {
+		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
 			works = false;
 		}
 		// Makes sure if the cell is a doorway that the person can only leave
@@ -273,7 +273,7 @@ public class Board {
 			works = false;
 		}
 		// Checks to make sure room spaces are added to the board
-		else if (board[row - 1][col].isRoom()) {
+		else if (board[row - 1][col].isRoom() && !board[row -1][col].isDoorway()) {
 			works = false;
 		}
 		// Checks to make sure the doorways are added correctly.
@@ -285,7 +285,7 @@ public class Board {
 
 	private boolean downWorks(int row, int col) {
 		boolean works = true;
-		if (board[row][col].isRoom()) {
+		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
 			works = false;
 		}
 		if (board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.DOWN)) {
@@ -293,7 +293,7 @@ public class Board {
 		}
 		if (row + 1 >= numRows) {
 			works = false;
-		} else if (board[row + 1][col].isRoom()) {
+		} else if (board[row + 1][col].isRoom() && !board[row + 1][col].isDoorway()) {
 			works = false;
 		} else if (board[row + 1][col].isDoorway() && !(board[row + 1][col].getDoorDirection() == DoorDirection.UP)) {
 			works = false;
@@ -303,7 +303,7 @@ public class Board {
 
 	private boolean leftWorks(int row, int col) {
 		boolean works = true;
-		if (board[row][col].isRoom()) {
+		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
 			works = false;
 		}
 		if (board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.LEFT)) {
@@ -311,7 +311,7 @@ public class Board {
 		}
 		if (col - 1 < 0) {
 			works = false;
-		} else if (board[row][col - 1].isRoom()) {
+		} else if (board[row][col - 1].isRoom() && !board[row][col-1].isDoorway()) {
 			works = false;
 		} else if (board[row][col - 1].isDoorway()
 				&& !(board[row][col - 1].getDoorDirection() == DoorDirection.RIGHT)) {
@@ -322,7 +322,7 @@ public class Board {
 
 	private boolean rightWorks(int row, int col) {
 		boolean works = true;
-		if (board[row][col].isRoom()) {
+		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
 			works = false;
 		}
 		if (board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.RIGHT)) {
@@ -330,7 +330,7 @@ public class Board {
 		}
 		if (col + 1 >= numColumns) {
 			works = false;
-		} else if (board[row][col + 1].isRoom()) {
+		} else if (board[row][col + 1].isRoom() && !board[row][col+1].isDoorway()) {
 			works = false;
 		} else if (board[row][col + 1].isDoorway() && !(board[row][col + 1].getDoorDirection() == DoorDirection.LEFT)) {
 			works = false;
@@ -494,7 +494,6 @@ public class Board {
 			Player p = playerList.get(i);
 			Card possibleCard = p.disproveSuggestion(solution);
 			if(!(possibleCard == null)) return possibleCard;
-			System.out.println(i);
 			i++;
 			if (i == playerList.size()) i = 0;
 		}
