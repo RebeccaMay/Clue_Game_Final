@@ -12,8 +12,13 @@ public class Card {
 	//	return false;
 	//}
 	
-	@Override
+	public Card() {
+		// TODO Auto-generated constructor stub
+	}
+
+	//@Override
 	public boolean equals(Object o) {
+		if(o == null) o = new Card();
 		Card c = (Card)o;
 		return this.cardName.equals(c.cardName) && this.cardType.equals(c.cardType);
 	}

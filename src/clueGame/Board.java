@@ -486,6 +486,19 @@ public class Board {
 		return theAnswer.check(accusation);
 	}
 	
+	public Card handleSuggestion(Solution solution) {
+		//Loop runs for the size of the player list
+		int i = currentPlayer + 1;
+		while(i != currentPlayer) {
+			if (i == playerList.size()) i = 0;
+			Player p = playerList.get(i);
+			Card possibleCard = p.disproveSuggestion(solution);
+			if(possibleCard == null) return possibleCard;
+			i++;
+		}
+		return null;
+	}
+	
 	//This getter is for testing only
 	public Set<Card> getDeck(){
 		return this.cardDeck;
@@ -522,14 +535,14 @@ public class Board {
 	public Map<Character, String> getRoomMap() {
 		return rooms;
 	}
-
-	public Card handleSuggestion(Solution solution) {
-		return null;		
-	}
-
+	
+	//This function only is used for testing
 	public void forceSetPlayerList(ArrayList<Player> testPlayerList) {
 		// TODO Auto-generated method stub
-		
+		this.playerList.clear();
+		for(Player p: testPlayerList) {
+			this.playerList.add(p);
+		}
 	}
 
 	public void setCurrentPlayer(int currentPlayer) {
