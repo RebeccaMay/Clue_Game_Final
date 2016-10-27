@@ -271,6 +271,15 @@ public class gameActionTests {
 			assertEquals(null, testPlayer.disproveSuggestion(disprove));
 		}
 	}
+	
+	@Test
+	public void testHandleSuggestion() {
+		//Test the board class, make some fake players and deal them some cards
+		
+		//Set the answer from the board class to a specific solution.
+		
+		// 
+	}
 }
 
 
