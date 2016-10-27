@@ -489,12 +489,14 @@ public class Board {
 	public Card handleSuggestion(Solution solution) {
 		//Loop runs for the size of the player list
 		int i = currentPlayer + 1;
+		if (i == playerList.size()) i = 0;
 		while(i != currentPlayer) {
-			if (i == playerList.size()) i = 0;
 			Player p = playerList.get(i);
 			Card possibleCard = p.disproveSuggestion(solution);
-			if(possibleCard == null) return possibleCard;
+			if(!(possibleCard == null)) return possibleCard;
+			System.out.println(i);
 			i++;
+			if (i == playerList.size()) i = 0;
 		}
 		return null;
 	}

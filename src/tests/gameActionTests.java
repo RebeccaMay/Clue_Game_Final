@@ -335,7 +335,7 @@ public class gameActionTests {
 		//Test to see if human player can only disprove it, then the return is the card. 
 		//Test at player 1
 		board.setCurrentPlayer(0);
-		assertTrue(room2.equals(board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "House of Mirrors"))));
+		assertEquals(room2, board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "House of Mirrors")));
 		
 		
 		//Test at player 5
