@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,6 +12,8 @@ import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 
 public class gameActionTests {
@@ -274,11 +278,82 @@ public class gameActionTests {
 	
 	@Test
 	public void testHandleSuggestion() {
-		//Test the board class, make some fake players and deal them some cards
+		//Test the board class, make some fake players and deal them some cards. These functions are only used for testing. 
+		//The setup of the data structures is tested in GameSetupTests.java
+		ComputerPlayer testPlayer1 = new ComputerPlayer("TestPlayer1", "White", 0,0);
+		ComputerPlayer testPlayer2 = new ComputerPlayer("TestPlayer2", "White", 0,0);
+		ComputerPlayer testPlayer3 = new ComputerPlayer("TestPlayer3", "White", 0,0);
+		ComputerPlayer testPlayer4 = new ComputerPlayer("TestPlayer4", "White", 0,0);
+		ComputerPlayer testPlayer5 = new ComputerPlayer("TestPlayer5", "White", 0,0);
+		HumanPlayer testPlayer6 = new HumanPlayer("TestPlayer6", "White", 0,0);
 		
-		//Set the answer from the board class to a specific solution.
+		//Deal specific cards to the players to make sure order is kept, deal one card for testing, 
+		// No need to deal the whole deck.
+		Card weapon1 = new Card("Balloon Animal", CardType.WEAPON);
+		Card weapon2 = new Card("Goat", CardType.WEAPON);
 		
-		// 
+		Card person1 = new Card("Chad Bricky",CardType.PERSON);	
+		Card person2 = new Card("Mary M.",CardType.PERSON);	
+		
+		Card room1 = new Card("Bouncy Castle",CardType.ROOM);
+		Card room2 = new Card("House of Mirrors",CardType.ROOM);
+
+		//Give them the cards
+		board.forceGiveCard(testPlayer1, weapon1);
+		board.forceGiveCard(testPlayer2, weapon2);
+		board.forceGiveCard(testPlayer3, person1);
+		board.forceGiveCard(testPlayer4, person2);
+		board.forceGiveCard(testPlayer5, room1);
+		board.forceGiveCard(testPlayer6, room2);
+		//Add them to the list
+		ArrayList<Player> testPlayerList = new ArrayList<Player>();
+		testPlayerList.add(testPlayer1);
+		testPlayerList.add(testPlayer2);
+		testPlayerList.add(testPlayer3);
+		testPlayerList.add(testPlayer4);
+		testPlayerList.add(testPlayer5);
+		testPlayerList.add(testPlayer6);
+		//Set this list of players as a "faux" player list for testing
+		board.forceSetPlayerList(testPlayerList);
+		
+		//Test to make sure that if we are at player1, that if nobody can disprove the suggestion, then null is returned
+		board.setCurrentPlayer(0);
+		assertEquals(null, board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "Corn Maze")));
+		
+		//Test to see that this is also true for starting at player5
+		board.setCurrentPlayer(4);
+		assertEquals(null, board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "Corn Maze")));
+		
+		//Test to see if player 1 can only disprove the answer then returns null
+		board.setCurrentPlayer(0);
+		assertEquals(null, board.handleSuggestion(new Solution("LtCmdr Dan", "Balloon Animal", "Corn Maze")));
+		
+		//Test if it works at player 5
+		board.setCurrentPlayer(4);
+		assertEquals(null, board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "Bouncy Castle")));
+		
+		//Test to see if human player can only disprove it, then the return is the card. 
+		//Test at player 1
+		board.setCurrentPlayer(0);
+		assertEquals(room2, board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "House of Mirrors")));
+		
+		
+		//Test at player 5
+		board.setCurrentPlayer(4);
+		assertEquals(room2, board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "House of Mirrors")));
+		
+		//Now test to see if the human is the accuser, it instead returns null
+		board.setCurrentPlayer(5);
+		assertEquals(null, board.handleSuggestion(new Solution("LtCmdr Dan", "Broken Mirror", "House of Mirrors")));
+		
+		//Test to see if two people can disprove, that the correct one disproves
+		//Start at player1 and players 2 and 3 can disprove, check to see player 2 disproved. 
+		board.setCurrentPlayer(0);
+		assertEquals(weapon2, board.handleSuggestion(new Solution("Chad Bricky", "Goat", "Corn Maze")));
+		
+		//Again, test to make sure human player's card doesn't take priority
+		board.setCurrentPlayer(0);
+		assertEquals(weapon2, board.handleSuggestion(new Solution("LtCmdr Dan", "Goat", "House of Mirrors")));
 	}
 }
 

@@ -35,6 +35,7 @@ public class Board {
 	private Set<Card> roomDeck;
 	private Set<Card> cardDeck;
 	private ArrayList<Player> playerList;
+	private int currentPlayer = 0;
 	
 	private Solution theAnswer;
 	
@@ -502,7 +503,7 @@ public class Board {
 	}
 
 	//For Testing Purposes Only
-	public void forceGiveCard(ComputerPlayer testPlayer, Card cardToGive) {
+	public void forceGiveCard(Player testPlayer, Card cardToGive) {
 		// TODO Auto-generated method stub
 		testPlayer.giveCard(cardToGive);
 	}
@@ -520,5 +521,18 @@ public class Board {
 	
 	public Map<Character, String> getRoomMap() {
 		return rooms;
+	}
+
+	public Card handleSuggestion(Solution solution) {
+		return null;		
+	}
+
+	public void forceSetPlayerList(ArrayList<Player> testPlayerList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCurrentPlayer(int currentPlayer) {
+		this.currentPlayer = currentPlayer;
 	}
 }
