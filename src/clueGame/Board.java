@@ -639,7 +639,7 @@ public class Board extends JPanel{
 			firstCol.setLayout(new GridLayout(1,1));
 			
 			JPanel t1Panel = new JPanel();
-			t1Panel.setLayout(new GridLayout(3,3));
+			t1Panel.setLayout(new GridLayout(3,1));
 			
 			JPanel rollPanel = new JPanel();
 			rollPanel.setLayout(new GridLayout(1,2));
@@ -703,14 +703,12 @@ public class Board extends JPanel{
 			jp.add(secCol);
 			jp.add(thirdCol);
 			return jp;
-			
 	}
 		
 	public static void main(String[] args) {
 		Board b = new Board();
 		b.setConfigFiles("Layout.csv", "legend.txt", "playerData.txt", "weapons.txt");
 		b.initialize();
-		
 		
 		//GUI Code
 		JFrame frame = new JFrame();
