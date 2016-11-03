@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -46,6 +47,7 @@ public class Board extends JPanel{
 	private Set<Card> weaponDeck;
 	private Set<Card> roomDeck;
 	private Set<Card> cardDeck;
+	private Set<Card> dealingDeck;
 	private ArrayList<Player> playerList;
 	private int currentPlayer = 0;
 	
@@ -500,10 +502,49 @@ public class Board extends JPanel{
 	public BoardCell getCellAt(int row, int col) {
 		return board[row][col];
 	}
+	
+	public void createSolution(){
+		Random rand = new Random();
+		int rnum = rand.nextInt(weaponDeck.size());
+		int counter = 0;
+		String person = "", room = "", weapon = "";
+		
+		for (Card c: weaponDeck){
+			if(counter == rnum){
+				weapon = c.getCardName();
+			}
+			else{
+				dealingDeck.add(c);
+			}
+			counter++;
+		}
+		counter = 0;
+		for (Card c: roomDeck){
+			if(counter == rnum){
+				room = c.getCardName();
+			}
+			else{
+				dealingDeck.add(c);
+			}
+			counter++;
+		}
+		counter = 0;
+		for (Card c: peopleDeck){
+			if(counter == rnum){
+				person = c.getCardName();
+			}
+			else{
+				dealingDeck.add(c);
+			}
+			counter++;
+		}
+		
+		theAnswer.setValues(person, weapon, room);
+	}
 
 	public void dealCards(){
 		int playerNum = 0;
-		for (Card c: this.cardDeck){
+		for (Card c: this.dealingDeck){
 			this.playerList.get(playerNum).giveCard(c);
 			
 			playerNum++;
