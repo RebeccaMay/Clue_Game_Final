@@ -126,6 +126,7 @@ public class Board extends JPanel{
 		}
 		
 		calcAdjacencies();
+		createSolution();
 		dealCards();
 		return;
 	}
@@ -465,7 +466,7 @@ public class Board extends JPanel{
 		int rnum = rand.nextInt(weaponDeck.size());
 		int counter = 0;
 		String person = "", room = "", weapon = "";
-		
+
 		for (Card c: weaponDeck){
 			if(counter == rnum){
 				weapon = c.getCardName();

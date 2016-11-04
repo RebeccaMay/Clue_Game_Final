@@ -131,7 +131,7 @@ public class GameSetupTests {
 		
 		//Checks that each player has either 3 or 4 cards (3 players have 3, 3 players have 4)
 		for (Player p: board.getPlayerList()){
-			assertTrue(p.getCards().size() == 4 || p.getCards().size() == 3); 
+			assertTrue(p.getCards().size() == 3); 			
 		}
 		
 		//Checks to make sure number of cards equals total cards
@@ -139,7 +139,7 @@ public class GameSetupTests {
 		for (Player p: board.getPlayerList()){
 			counter += p.getCards().size(); 
 		}
-		assertEquals(21,counter);
+		assertEquals(18,counter);
 		
 		//Checks to see if every card is dealt once
 		counter = 0;
@@ -214,7 +214,7 @@ public class GameSetupTests {
 				
 			}
 		}
-		assertEquals(21,counter);
+		assertEquals(18,counter);
 		
 	}
 	
