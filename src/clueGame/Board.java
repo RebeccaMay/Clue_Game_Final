@@ -696,21 +696,5 @@ public class Board extends JPanel{
 			jp.add(secCol);
 			jp.add(thirdCol);
 			return jp;
-	}
-		
-	public static void main(String[] args) {
-		Board b = new Board();
-		b.setConfigFiles("Layout.csv", "legend.txt", "playerData.txt", "weapons.txt");
-		b.initialize();
-		
-		//GUI Code
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("GUI Example");
-		frame.setSize(900, 300);	
-		frame.add(b);
-		frame.setVisible(true);
-	}
-	
-	
+	}	
 }
