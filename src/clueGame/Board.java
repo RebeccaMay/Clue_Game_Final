@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -80,9 +81,10 @@ public class Board extends JPanel{
 		
 		
 		//GUI code
-		setLayout(new GridLayout(2,0));
+		setLayout(new GridLayout(3,1));
 		JPanel topRow = createTopRow();
 		JPanel bottomRow = createBottomRow();
+		add(new JPanel());
 		add(topRow);
 		add(bottomRow);
 		
@@ -704,6 +706,12 @@ public class Board extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
+		for (int i=0;i<numRows;i++){
+			for (int j=0;j<numColumns;j++){
+				board[i][j].draw(g);
+			}
+		}
 		
+		repaint();
 	}
 }

@@ -12,7 +12,7 @@ public class ClueGame extends JFrame{
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("GUI Example");
-		setSize(900, 300);	
+		setSize(900, 900);	
 		add(board);
 		
 	}

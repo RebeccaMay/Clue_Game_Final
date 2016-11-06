@@ -16,7 +16,7 @@ public class BoardCell {
 
 	//GUI related variables
 	Color c;
-	int sideLength;
+	int sideLength = 20;
 	String roomName = "";
 
 	public BoardCell(int row, int column, char initial,DoorDirection door) {
@@ -80,6 +80,8 @@ public class BoardCell {
 	}
 
 	public void draw(Graphics g){
-
+		g.setColor(Color.BLACK);
+		//g.drawRect(column*sideLength, row*sideLength, sideLength, sideLength);
+		g.drawRect(10, 10, 50, 50);
 	}
 }
