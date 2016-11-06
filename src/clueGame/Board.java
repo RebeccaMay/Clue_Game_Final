@@ -223,7 +223,7 @@ public class Board extends JPanel{
 		while (in.hasNext()) {
 			currentCell = currentCell + in.next();
 			currentCell = currentCell + ",";
-			numRows = numRows + 1;
+			numRows++;
 		}
 		in.close();
 
@@ -269,7 +269,7 @@ public class Board extends JPanel{
 					throw new BadConfigFormatException();
 				}
 				board[row][col] = cell;
-				counter = counter + 1;
+				counter++;
 				doorDirection = DoorDirection.NONE;
 			}
 		}
