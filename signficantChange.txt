@@ -1,0 +1,164 @@
+CALC ADJACENCIES BEFORE
+
+private boolean upWorks(int row, int col) {
+-		boolean works = true;
+-		// Makes sure rooms have no adj's
+-		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
+-			works = false;
+-		}
+-		// Makes sure if the cell is a doorway that the person can only leave
+-		// the correct direction
+-		if (board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.UP)) {
+-			works = false;
+-		}
+-		// Checks the edge of board
+-		if (row - 1 < 0) {
+-			works = false;
+-		}
+-		// Checks to make sure room spaces are added to the board
+-		else if (board[row - 1][col].isRoom() && !board[row -1][col].isDoorway()) {
+-			works = false;
+-		}
+-		// Checks to make sure the doorways are added correctly.
+-		else if (board[row - 1][col].isDoorway() && !(board[row - 1][col].getDoorDirection() == DoorDirection.DOWN)) {
+-			works = false;
+-		}
+-		return works;
+-	}
+-
+-	private boolean downWorks(int row, int col) {
+-		boolean works = true;
+-		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
+-			works = false;
+-		}
+-		if (board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.DOWN)) {
+-			works = false;
+-		}
+-		if (row + 1 >= numRows) {
+-			works = false;
+-		} else if (board[row + 1][col].isRoom() && !board[row + 1][col].isDoorway()) {
+-			works = false;
+-		} else if (board[row + 1][col].isDoorway() && !(board[row + 1][col].getDoorDirection() == DoorDirection.UP)) {
+-			works = false;
+-		}
+-		return works;
+-	}
+-
+-	private boolean leftWorks(int row, int col) {
+-		boolean works = true;
+-		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
+-			works = false;
+-		}
+-		if (board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.LEFT)) {
+-			works = false;
+-		}
+-		if (col - 1 < 0) {
+-			works = false;
+-		} else if (board[row][col - 1].isRoom() && !board[row][col-1].isDoorway()) {
+-			works = false;
+-		} else if (board[row][col - 1].isDoorway()
+-				&& !(board[row][col - 1].getDoorDirection() == DoorDirection.RIGHT)) {
+-			works = false;
+-		}
+-		return works;
+-	}
+-
+-	private boolean rightWorks(int row, int col) {
+-		boolean works = true;
+-		if (board[row][col].isRoom() && !board[row][col].isDoorway()) {
+-			works = false;
+-		}
+-		if (board[row][col].isDoorway() && !(board[row][col].getDoorDirection() == DoorDirection.RIGHT)) {
+-			works = false;
+-		}
+-		if (col + 1 >= numColumns) {
+-			works = false;
+-		} else if (board[row][col + 1].isRoom() && !board[row][col+1].isDoorway()) {
+-			works = false;
+-		} else if (board[row][col + 1].isDoorway() && !(board[row][col + 1].getDoorDirection() == DoorDirection.LEFT)) {
+-			works = false;
+-		}
+-		return works;
+-	}
+-
+-	public void calcAdjacencies() {
+-		for (int row = 0; row < numRows; ++row) {
+-			for (int col = 0; col < numColumns; ++col) {
+-				HashSet<BoardCell> adjCells = new HashSet<BoardCell>();
+-				if (upWorks(row, col)) {
+-					adjCells.add(board[row - 1][col]);
+-				}
+-				if (leftWorks(row, col)) {
+-					adjCells.add(board[row][col - 1]);
+-				}
+-				if (downWorks(row, col)) {
+-					adjCells.add(board[row + 1][col]);
+-				}
+-				if (rightWorks(row, col)) {
+-					adjCells.add(board[row][col + 1]);
+
+
+
+CALC ADJACENCIES AFTER
+
+public void calcAdjacencies(){
++		for(int i = 0; i < numRows; i++) {
++			for (int j = 0; j < numColumns; j++) {
++				HashSet<BoardCell> temp = new HashSet<BoardCell>();
++				if(!board[i][j].isRoom()) {
++					if(board[i][j].isDoorway()) {
++						switch(board[i][j].getDoorDirection()){
++						case RIGHT:
++							if(i+1 < numRows) temp.add(board[i+1][j]);
++							break;
++						case DOWN:
++							if(j+1 < numColumns) temp.add(board[i][j+1]);
++							break;
++						case LEFT:
++							if(i-1 >= 0) temp.add(board[i-1][j]);
++							break;
++						case UP:
++							if(j-1 >= 0) temp.add(board[i][j-1]);
++							break;
++						case NONE:
++							break;
++						default:
++							break;
++						}
++					}
++					if(board[i][j].isWalkway()) {
++						if(board[i][j].getInitial() != 'X') {
++							if(i-1 >= 0 && (!board[i-1][j].isRoom() || board[i-1][j].getDoorDirection() == DoorDirection.DOWN) && board[i-1][j].getInitial() != 'X') temp.add(board[i-1][j]);
++							if(i+1 < numRows && (!board[i+1][j].isRoom() || board[i+1][j].getDoorDirection() == DoorDirection.UP) && board[i+1][j].getInitial() != 'X') temp.add(board[i+1][j]);
++							if(j-1 >= 0 && (!board[i][j-1].isRoom() || board[i][j-1].getDoorDirection() == DoorDirection.RIGHT) && board[i][j-1].getInitial() != 'X') temp.add(board[i][j-1]);
++							if(j+1 < numColumns && (!board[i][j+1].isRoom() || board[i][j+1].getDoorDirection() == DoorDirection.LEFT) && board[i][j+1].getInitial() != 'X') temp.add(board[i][j+1]);
++						}
++					}
++				} else {
++					switch(board[i][j].getDoorDirection()) {
++					case DOWN:
++						if(i+1 < numRows) temp.add(board[i+1][j]);
++						break;
++					case LEFT:
++						if(j-1 > 0) temp.add(board[i][j-1]);
++						break;
++					case NONE:
++						break;
++					case RIGHT:
++						if(j+1 < numColumns) temp.add(board[i][j+1]);
++						break;
++					case UP:
++						if(i-1 > 0) temp.add(board[i-1][j]);
++						break;
++					default:
++						break;
++					}
+ 				}
++				adjMatrix.put(board[i][j], temp);
++				
+ 			}
+ 		}
+-		return;
+ 	}
+
+
