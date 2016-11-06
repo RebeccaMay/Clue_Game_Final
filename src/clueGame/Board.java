@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
 
 public class Board extends JPanel{
 
@@ -697,4 +699,11 @@ public class Board extends JPanel{
 			jp.add(thirdCol);
 			return jp;
 	}	
+	
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		
+		
+	}
 }

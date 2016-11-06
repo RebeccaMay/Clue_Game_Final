@@ -9,15 +9,17 @@ public class ClueGame extends JFrame{
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "Legend 2.txt", "playerData.txt", "weapons.txt");
 		board.initialize();
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("GUI Example");
+		setSize(900, 300);	
+		add(board);
+		
 	}
 	
 	public static void main(String[] args) {		
 		//GUI Code
-		ClueGame cg = new ClueGame();
-		cg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		cg.setTitle("GUI Example");
-		cg.setSize(900, 300);	
-		cg.add(board);
+		ClueGame cg = new ClueGame();		
 		cg.setVisible(true);
 	}
 
