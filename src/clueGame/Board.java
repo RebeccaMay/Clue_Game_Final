@@ -284,12 +284,7 @@ public class Board extends JPanel{
 		return;
 	}
 
-	/*
-	 * This function should be the same as the intBoard tests except for the
-	 * following. Don't add rooms to the adjacency list. Add doorWays to
-	 * adjacency lists if the door is in the correct direction. I am making
-	 * private functions to make this more readable
-	 */
+	//Function to calculate all adjacent boardcells for each boardcell
 	public void calcAdjacencies(){
 		for(int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
@@ -461,6 +456,8 @@ public class Board extends JPanel{
 		return board[row][col];
 	}
 	
+	//Function that pulls 1 card of each type out of the deck to be the solution to the game
+	//The set called dealingDeck will no longer be a deck including all of the cards
 	public void createSolution(){
 		Random rand = new Random();
 		int rnum = rand.nextInt(weaponDeck.size());
@@ -500,6 +497,7 @@ public class Board extends JPanel{
 		theAnswer.setValues(person, weapon, room);
 	}
 
+	//Deals the cards from the deck that is already missing the solution
 	public void dealCards(){
 		int playerNum = 0;
 		for (Card c: this.dealingDeck){
@@ -510,10 +508,13 @@ public class Board extends JPanel{
 		}
 	}
 	
+	//Function that compares a players acccusation to the solution
+	//if this is correct, the player wins the game
 	public boolean checkAccusation(Solution accusation){
 		return theAnswer.check(accusation);
 	}
 	
+	//Will loop through each player until one can disprove the suggestion (if someone can)
 	public Card handleSuggestion(Solution solution) {
 		//Loop runs for the size of the player list
 		int i = currentPlayer + 1;
