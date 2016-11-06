@@ -174,6 +174,7 @@ public class Board extends JPanel{
 				this.roomDeck.add(roomCard);
 			}
 		}
+		in.close();
 		return;
 	}
 
@@ -225,14 +226,6 @@ public class Board extends JPanel{
 			numRows = numRows + 1;
 		}
 		in.close();
-		/*
-		 * This splits the entire file into an array of strings which are
-		 * separated by A comma. PLEASE NOTE: this next bit of code must be here
-		 * because the different CSV files read in differently. Her original one
-		 * will read in with no commas separating the last entry in each column.
-		 * Ours however will put a comma at the end of each row and the
-		 * beginning of each row.
-		 */
 
 		// Must remove extra commas from differently formated csv files
 		for (int i = 0; i < currentCell.length() - 1; ++i) {
