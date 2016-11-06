@@ -80,8 +80,7 @@ public class BoardCell {
 	}
 
 	public void draw(Graphics g){
-		g.setColor(Color.BLACK);
-		//g.drawRect(column*sideLength, row*sideLength, sideLength, sideLength);
-		g.drawRect(10, 10, 50, 50);
+		g.setColor(c);
+		g.drawRect(column*sideLength, row*sideLength, sideLength, sideLength);
 	}
 }
