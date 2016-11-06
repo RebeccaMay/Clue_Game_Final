@@ -8,12 +8,8 @@ public class Card {
 		this.cardName = name;
 		this.cardType = type;
 	}
-	//public boolean equals() {
-	//	return false;
-	//}
-	
+
 	public Card() {
-		// TODO Auto-generated constructor stub
 	}
 
 	//@Override

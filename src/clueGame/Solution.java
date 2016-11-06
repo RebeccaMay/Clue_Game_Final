@@ -11,9 +11,9 @@ public class Solution {
 		this.room = room;
 		this.weapon = weapon;
 	}
-
-	public Solution() {
-		// TODO Auto-generated constructor stub
+	
+	public Solution(){
+		
 	}
 
 	//Used to set the values of the Solution for testing,
