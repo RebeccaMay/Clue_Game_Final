@@ -15,9 +15,9 @@ public class BoardCell {
 	private boolean doorway = false;
 
 	//GUI related variables
-	Color c;
-	int sideLength = 20;
-	String roomName = "";
+	private Color c;
+	private int sideLength = 20;
+	private String roomName = "";
 
 	public BoardCell(int row, int column, char initial,DoorDirection door) {
 		super();
