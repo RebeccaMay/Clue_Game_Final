@@ -16,8 +16,10 @@ public class BoardCell {
 
 	//GUI related variables
 	private Color c;
-	private int sideLength = 20;
+	private final int sideLength = 25;
+	private final int doorWidth = 3;
 	private String roomName = "";
+	
 
 	public BoardCell(int row, int column, char initial,DoorDirection door) {
 		super();
@@ -67,7 +69,6 @@ public class BoardCell {
 
 	// Private method for converting string representation of color to actual color object
 	private Color convertColor(String strColor) {
-		strColor = strColor.toLowerCase();
 		Color color; 
 		try {     
 			// We can use reflection to convert the string to a color
@@ -81,6 +82,29 @@ public class BoardCell {
 
 	public void draw(Graphics g){
 		g.setColor(c);
-		g.drawRect(column*sideLength, row*sideLength, sideLength, sideLength);
+		g.fillRect(column*sideLength, row*sideLength, sideLength, sideLength);		
+		if(walkway == true){
+			g.setColor(Color.black);
+			g.drawRect(column*sideLength, row*sideLength, sideLength, sideLength);
+		}
+		if(doorway == true){
+			g.setColor(Color.blue);
+			switch(door){
+				case UP:
+					g.fillRect(column*sideLength, row*sideLength,sideLength,doorWidth);
+					break;
+				case DOWN:
+					g.fillRect(column*sideLength, (row+1)*sideLength-doorWidth,sideLength,doorWidth);
+					break;
+				case LEFT:
+					g.fillRect(column*sideLength, row*sideLength,doorWidth,sideLength);
+					break;
+				case RIGHT:
+					g.fillRect((column+1)*sideLength-doorWidth, row*sideLength,doorWidth,sideLength);
+					break;
+			}
+			
+		}
+		
 	}
 }

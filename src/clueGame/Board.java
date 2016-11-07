@@ -71,7 +71,8 @@ public class Board extends JPanel{
 		weaponDeck = new HashSet<Card>();
 		roomDeck = new HashSet<Card>();
 		dealingDeck = new HashSet<Card>();
-		theAnswer = new Solution();		
+		theAnswer = new Solution();
+		this.setMinimumSize(new Dimension(400,400));
 	}
 
 	// Makes sure only one instance of Board can exist;
