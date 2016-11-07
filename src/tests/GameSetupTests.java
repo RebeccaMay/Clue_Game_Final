@@ -23,7 +23,7 @@ public class GameSetupTests {
 	public static void setUp() {
 		// Board is singleton, get the only instance and initialize it		
 		board = Board.getInstance();
-		board.setConfigFiles("Layout.csv", "legend.txt", "playerData.txt", "weapons.txt");		
+		board.setConfigFiles("Layout.csv", "legend.txt", "playerData.txt", "weapons.txt","RoomNameLayout");		
 		board.initialize();
 	}
 

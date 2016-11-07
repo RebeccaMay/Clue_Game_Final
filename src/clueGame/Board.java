@@ -44,6 +44,7 @@ public class Board extends JPanel{
 	private String roomConfigFile;
 	private String playerConfigFile;
 	private String weaponConfigFile;
+	private String roomNameLayoutFile;
 
 
 	private Set<Card> peopleDeck;
@@ -106,6 +107,16 @@ public class Board extends JPanel{
 		
 		try{
 			loadWeaponConfig();
+		}
+		catch (BadConfigFormatException e) {
+			e.printStackTrace();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try{
+			loadRoomNameLayout();
 		}
 		catch (BadConfigFormatException e) {
 			e.printStackTrace();
@@ -184,6 +195,23 @@ public class Board extends JPanel{
 		in.close();
 	}
 	
+	
+	//loads weapons, places weapon cards within cardDeck
+	public void loadRoomNameLayout() throws BadConfigFormatException, FileNotFoundException{		
+		FileReader fr = new FileReader(roomNameLayoutFile);
+		Scanner in = new Scanner(fr);
+		while(in.hasNextLine()){				
+			String[] strs = in.nextLine().split(", ");
+			if(strs.length != 3) throw new BadConfigFormatException("Improper number of parameters in roomNameLayout");
+			
+			String name = strs[0];
+			int row = Integer.parseInt(strs[1]);
+			int col = Integer.parseInt(strs[2]);
+					
+			board[row][col].setRoomName(name);
+		}
+		in.close();
+	}
 	
 	//loads weapons, places weapon cards within cardDeck
 	public void loadWeaponConfig() throws BadConfigFormatException, FileNotFoundException{		
@@ -409,12 +437,13 @@ public class Board extends JPanel{
 	}
 
 	// Sets the config files for the board and rooms.
-	public void setConfigFiles(String board, String rooms, String players, String weapons) {
+	public void setConfigFiles(String board, String rooms, String players, String weapons, String rlayout) {
 
 		boardConfigFile = "data/" + board;
 		roomConfigFile = "data/" + rooms;
 		playerConfigFile = "data/" + players;
 		weaponConfigFile = "data/" + weapons;
+		roomNameLayoutFile = "data/" + rlayout;
 		return;
 	}
 
