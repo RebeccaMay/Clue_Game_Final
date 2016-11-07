@@ -33,7 +33,7 @@ public class CR_FileInitTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegend.txt", "playerData.txt", "weapons.txt","RoomNameLayout");		
+		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegend.txt", "playerDataAPJS.txt", "weaponsAPJS.txt","RoomNameLayout");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
