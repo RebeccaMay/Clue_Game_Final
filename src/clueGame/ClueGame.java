@@ -2,9 +2,12 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class ClueGame extends JFrame{
@@ -25,7 +28,9 @@ public class ClueGame extends JFrame{
 		setSize(625, 900);	
 		add(board,BorderLayout.CENTER);
 		add(cgui,BorderLayout.SOUTH);
-		add(createMenu(), BorderLayout.NORTH);
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		menuBar.add(createFileMenu());
 	}
 	
 	public static void main(String[] args) {		
@@ -37,20 +42,31 @@ public class ClueGame extends JFrame{
 		detectiveNotes.setVisible(true);
 	}
 	
-	public JMenu createMenu(){
+	public JMenu createFileMenu(){
 		JMenu menu = new JMenu("File");
-		menu.add(createFileShowNotesItem());
-		menu.add(createFileExitItem());
+		menu.add(createShowNotesItem());
+		menu.add(createExitItem());
 		return menu;
 	}
 	
-	public JMenuItem createFileExitItem(){
+	public JMenuItem createExitItem(){
 		JMenuItem exit = new JMenuItem("Exit");
+		class MenuItemListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		}
+		exit.addActionListener(new MenuItemListener());
 		return exit;
 	}
 	
-	public JMenuItem createFileShowNotesItem(){
+	public JMenuItem createShowNotesItem(){
 		JMenuItem showNotes = new JMenuItem("Show Notes");
+		class MenuItemListner implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				//Need to open Detective Notes
+			}
+		}
 		return showNotes;
 	}
 
