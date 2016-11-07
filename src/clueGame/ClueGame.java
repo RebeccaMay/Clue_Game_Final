@@ -12,7 +12,7 @@ public class ClueGame extends JFrame{
 	private static Board board;
 	private ControlGUI cgui;
 	
-	ClueGame(){
+	public ClueGame(){
 		board = Board.getInstance();
 		board.setConfigFiles("LayoutAPJS.csv", "legendAPJS.txt", "playerDataAPJS.txt", "weaponsAPJS.txt","RoomNameLayoutAPJS.txt");
 		board.initialize();
@@ -25,12 +25,12 @@ public class ClueGame extends JFrame{
 		setSize(625, 900);	
 		add(board,BorderLayout.CENTER);
 		add(cgui,BorderLayout.SOUTH);
-		
+		add(createMenu(), BorderLayout.NORTH);
 	}
 	
 	public static void main(String[] args) {		
 		//GUI Code
-		ClueGame cg = new ClueGame();		
+		ClueGame cg = new ClueGame();
 		cg.setVisible(true);
 		
 		DetectiveNotes detectiveNotes = new DetectiveNotes();
@@ -38,19 +38,19 @@ public class ClueGame extends JFrame{
 	}
 	
 	public JMenu createMenu(){
-		JMenu menu = JMenu("File");
+		JMenu menu = new JMenu("File");
 		menu.add(createFileShowNotesItem());
 		menu.add(createFileExitItem());
 		return menu;
 	}
 	
 	public JMenuItem createFileExitItem(){
-		JMenuItem exit = JMenuItem("Exit");
+		JMenuItem exit = new JMenuItem("Exit");
 		return exit;
 	}
 	
 	public JMenuItem createFileShowNotesItem(){
-		JMenuItem showNotes = JMenuItem("Show Notes");
+		JMenuItem showNotes = new JMenuItem("Show Notes");
 		return showNotes;
 	}
 
