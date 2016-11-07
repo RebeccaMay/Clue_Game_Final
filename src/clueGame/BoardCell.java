@@ -16,7 +16,7 @@ public class BoardCell {
 
 	//GUI related variables
 	private Color c;
-	private final int sideLength = 25;
+	private final int sideLength = 26;
 	private final int doorWidth = 3;
 	private String roomName = "";
 	

@@ -600,6 +600,9 @@ public class Board extends JPanel{
 			}
 		}
 		
+		for(Player p: playerList){
+			p.draw(g);
+		}
 		repaint();
 	}
 }

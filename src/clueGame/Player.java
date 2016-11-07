@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -15,6 +16,8 @@ public class Player {
 	
 	protected Set<Card> myCards;
 	protected Set<Card> seenCards;
+	
+	private final int diameter = 26;
 	
 	public Player(String name, String color, int row, int col){
 		this.playerName = name;
@@ -80,5 +83,12 @@ public class Player {
 	//This getter is for testing only
 	public Set<Card> getCards(){
 		return this.myCards;
+	}
+	
+	public void draw(Graphics g){
+		g.setColor(color);
+		g.fillOval(column*diameter, row*diameter, diameter, diameter);
+		g.setColor(Color.black);
+		g.drawOval(column*diameter, row*diameter, diameter, diameter);
 	}
 }
