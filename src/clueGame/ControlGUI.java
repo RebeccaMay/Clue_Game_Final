@@ -40,20 +40,14 @@ public class ControlGUI extends JPanel{
 
 		//first column in row
 		JPanel firstCol = new JPanel();
-		firstCol.setLayout(new GridLayout(3,3));
+		firstCol.setLayout(new GridLayout(3,1));
 		JLabel labelWhoseTurn = new JLabel("Whose Turn?",JLabel.CENTER);
 		txtfieldWhoseTurn = new JTextField("");
 		txtfieldWhoseTurn.setEditable(false);
 
 		//multiple panels for proper spacing
-		firstCol.add(new JPanel());
-		firstCol.add(labelWhoseTurn,BorderLayout.NORTH);
-		firstCol.add(new JPanel());
-		firstCol.add(new JPanel());
-		firstCol.add(txtfieldWhoseTurn,BorderLayout.SOUTH);
-		firstCol.add(new JPanel());
-		firstCol.add(new JPanel());
-		firstCol.add(new JPanel());
+		firstCol.add(labelWhoseTurn);
+		firstCol.add(txtfieldWhoseTurn);
 		firstCol.add(new JPanel());
 
 		//Second column in row
