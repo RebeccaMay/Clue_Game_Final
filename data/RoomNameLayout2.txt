@@ -1,0 +1,9 @@
+Bouncy Castle, 14, 2
+House of Mirrors, 21, 6
+Corn Maze, 2, 8
+Haunted House, 20, 0
+Ring Toss, 14, 9
+Hay Ride, 5, 1
+Petting Zoo, 2, 17
+Ticket Booth, 21, 15
+Circus Tent, 10, 18

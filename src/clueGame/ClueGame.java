@@ -12,7 +12,7 @@ public class ClueGame extends JFrame{
 	
 	ClueGame(){
 		board = Board.getInstance();
-		board.setConfigFiles("Layout.csv", "legend.txt", "playerData.txt", "weapons.txt","RoomNameLayout");
+		board.setConfigFiles("Layout.csv", "legend.txt", "playerData.txt", "weapons.txt","RoomNameLayout2.txt");
 		board.initialize();
 		
 		cgui = new ControlGUI();

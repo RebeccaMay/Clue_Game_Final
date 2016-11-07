@@ -106,5 +106,10 @@ public class BoardCell {
 			
 		}
 		
+		if(roomName != ""){
+			g.setColor(Color.black);
+			g.drawString(roomName, column*sideLength, row*sideLength);
+		}
+		
 	}
 }
