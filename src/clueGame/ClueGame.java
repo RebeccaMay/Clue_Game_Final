@@ -61,8 +61,7 @@ public class ClueGame extends JFrame{
 		JMenuItem showNotes = new JMenuItem("Show Notes");
 		class MenuItemListner implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				DetectiveNotes notes = new DetectiveNotes();		//FIXME
-				notes.setVisible(true);
+				//Not sure how to make detective notes open here
 			}
 		}
 		return showNotes;
