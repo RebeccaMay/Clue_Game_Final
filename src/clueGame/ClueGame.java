@@ -4,11 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ClueGame extends JFrame{
@@ -36,6 +38,11 @@ public class ClueGame extends JFrame{
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
+		
+		JOptionPane opPane = new JOptionPane();
+		ArrayList<Player> plist = board.getPlayerList();
+		
+		opPane.showMessageDialog(this, "You are " + plist.get(0).getPlayerName() + ", press Next Player to begin playing!");
 		
 	}
 	
