@@ -20,7 +20,7 @@ public class DetectiveNotes extends JDialog {
 		currentBoard = b;
 		setLayout(new GridLayout(3, 2));
 		setSize(1000, 900);	
-		
+		setTitle("Detective Notes");
 		JPanel panel1 = peoplePanel();
 		add(panel1);
 		JPanel panel2 = personGuessPanel();
