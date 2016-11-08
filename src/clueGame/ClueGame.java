@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 public class ClueGame extends JFrame{
 
@@ -31,6 +32,7 @@ public class ClueGame extends JFrame{
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
+		
 	}
 	
 	public static void main(String[] args) {		
@@ -59,11 +61,15 @@ public class ClueGame extends JFrame{
 	
 	public JMenuItem createShowNotesItem(){
 		JMenuItem showNotes = new JMenuItem("Show Notes");
-		class MenuItemListner implements ActionListener{
+		DetectiveNotes dtn = new DetectiveNotes();
+		
+		class NotesItemListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				//Not sure how to make detective notes open here
+				dtn.setVisible(true);
+				System.out.println("show dnotes");
 			}
 		}
+		showNotes.addActionListener(new NotesItemListener());
 		return showNotes;
 	}
 

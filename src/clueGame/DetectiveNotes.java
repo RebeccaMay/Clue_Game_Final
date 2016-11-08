@@ -3,17 +3,21 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class DetectiveNotes extends JPanel {
+public class DetectiveNotes extends JDialog {
 
 	public DetectiveNotes(){
 		setLayout(new GridLayout(3, 2));
+		setSize(625, 900);	
+		
 		JPanel panel1 = peoplePanel();
 		add(panel1);
 		JPanel panel2 = personGuessPanel();
@@ -33,17 +37,17 @@ public class DetectiveNotes extends JPanel {
 		people.setLayout(new GridLayout(3, 2));
 		people.setBorder(new TitledBorder (new EtchedBorder(), "People"));
 		
-		JRadioButton player1 = new JRadioButton("Chad Bricky");		//We should probably read these in from a file
+		JCheckBox player1 = new JCheckBox("Chad Bricky");		//We should probably read these in from a file
 		people.add(player1);
-		JRadioButton player2 = new JRadioButton("Mary M.");
+		JCheckBox player2 = new JCheckBox("Mary M.");
 		people.add(player2);
-		JRadioButton player3 = new JRadioButton("Bozo the Bafoon");
+		JCheckBox player3 = new JCheckBox("Bozo the Bafoon");
 		people.add(player3);
-		JRadioButton player4 = new JRadioButton("Milton Dundershire");
+		JCheckBox player4 = new JCheckBox("Milton Dundershire");
 		people.add(player4);
-		JRadioButton player5 = new JRadioButton("Crystal Sunshine");
+		JCheckBox player5 = new JCheckBox("Crystal Sunshine");
 		people.add(player5);
-		JRadioButton player6 = new JRadioButton("LtCdr Dan");
+		JCheckBox player6 = new JCheckBox("LtCdr Dan");
 		people.add(player6);
 		
 		return people;
@@ -71,23 +75,23 @@ public class DetectiveNotes extends JPanel {
 		rooms.setLayout(new GridLayout(3, 3));
 		rooms.setBorder(new TitledBorder (new EtchedBorder(), "Rooms"));
 		
-		JRadioButton room1 = new JRadioButton("Bouncy Castle");		//We should probably read these in from a file
+		JCheckBox room1 = new JCheckBox("Bouncy Castle");		//We should probably read these in from a file
 		rooms.add(room1);
-		JRadioButton room2 = new JRadioButton("House of Mirrors");
+		JCheckBox room2 = new JCheckBox("House of Mirrors");
 		rooms.add(room2);
-		JRadioButton room3 = new JRadioButton("Corn Maze");
+		JCheckBox room3 = new JCheckBox("Corn Maze");
 		rooms.add(room3);
-		JRadioButton room4 = new JRadioButton("Haunted House");
+		JCheckBox room4 = new JCheckBox("Haunted House");
 		rooms.add(room4);
-		JRadioButton room5 = new JRadioButton("Ring Toss");
+		JCheckBox room5 = new JCheckBox("Ring Toss");
 		rooms.add(room5);
-		JRadioButton room6 = new JRadioButton("Hay Ride");
+		JCheckBox room6 = new JCheckBox("Hay Ride");
 		rooms.add(room6);
-		JRadioButton room7 = new JRadioButton("Petting Zoo");
+		JCheckBox room7 = new JCheckBox("Petting Zoo");
 		rooms.add(room7);
-		JRadioButton room8 = new JRadioButton("Ticket Booth");
+		JCheckBox room8 = new JCheckBox("Ticket Booth");
 		rooms.add(room8);
-		JRadioButton room9 = new JRadioButton("Circus Tent");
+		JCheckBox room9 = new JCheckBox("Circus Tent");
 		rooms.add(room9);
 		
 		return rooms;
@@ -116,17 +120,17 @@ public class DetectiveNotes extends JPanel {
 		weapons.setLayout(new GridLayout(3, 2));
 		weapons.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
 		
-		JRadioButton weapon1 = new JRadioButton("Balloon Animal");
+		JCheckBox weapon1 = new JCheckBox("Balloon Animal");
 		weapons.add(weapon1);
-		JRadioButton weapon2 = new JRadioButton("Goat");
+		JCheckBox weapon2 = new JCheckBox("Goat");
 		weapons.add(weapon2);
-		JRadioButton weapon3 = new JRadioButton("Broken Mirror");
+		JCheckBox weapon3 = new JCheckBox("Broken Mirror");
 		weapons.add(weapon3);
-		JRadioButton weapon4 = new JRadioButton("Cash Register");
+		JCheckBox weapon4 = new JCheckBox("Cash Register");
 		weapons.add(weapon4);
-		JRadioButton weapon5 = new JRadioButton("Brass Knuckles");
+		JCheckBox weapon5 = new JCheckBox("Brass Knuckles");
 		weapons.add(weapon5);
-		JRadioButton weapon6 = new JRadioButton("Elephant Hook");
+		JCheckBox weapon6 = new JCheckBox("Elephant Hook");
 		weapons.add(weapon6);
 		
 		return weapons;
