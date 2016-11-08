@@ -100,7 +100,7 @@ public class DetectiveNotes extends JDialog {
 		JComboBox<String> weapons = new JComboBox<String>();
 		
 		for(Card c: currentBoard.getWeaponDeck()){
-			weapons.add(new JCheckBox(c.getCardName()));
+			weapons.addItem(c.getCardName());
 		}
 		
 		weaponGuess.add(weapons);
