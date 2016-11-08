@@ -91,4 +91,8 @@ public class Player {
 		g.setColor(Color.black);
 		g.drawOval(column*diameter, row*diameter, diameter, diameter);
 	}
+	
+	public String getPlayerName(){
+		return playerName;
+	}
 }

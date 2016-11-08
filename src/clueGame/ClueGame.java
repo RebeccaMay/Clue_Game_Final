@@ -61,12 +61,11 @@ public class ClueGame extends JFrame{
 	
 	public JMenuItem createShowNotesItem(){
 		JMenuItem showNotes = new JMenuItem("Show Notes");
-		DetectiveNotes dtn = new DetectiveNotes();
+		DetectiveNotes dtn = new DetectiveNotes(board);
 		
 		class NotesItemListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				dtn.setVisible(true);
-				System.out.println("show dnotes");
 			}
 		}
 		showNotes.addActionListener(new NotesItemListener());
