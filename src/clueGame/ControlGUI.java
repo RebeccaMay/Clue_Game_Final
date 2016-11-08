@@ -20,7 +20,11 @@ public class ControlGUI extends JPanel{
 	private JTextField txtfieldGuess;
 	private JTextField txtfieldResponse;
 
-	ControlGUI(){
+	private Board b;
+	
+	ControlGUI(Board b){
+		this.b = b;
+		
 		//GUI code
 		setLayout(new GridLayout(2,1));
 		JPanel topRow = createTopRow();

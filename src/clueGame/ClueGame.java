@@ -15,20 +15,24 @@ public class ClueGame extends JFrame{
 
 	private static Board board;
 	private ControlGUI cgui;
+	private CardDisplay pcards;
 	
 	public ClueGame(){
 		board = Board.getInstance();
 		board.setConfigFiles("LayoutAPJS.csv", "legendAPJS.txt", "playerDataAPJS.txt", "weaponsAPJS.txt","RoomNameLayoutAPJS.txt");
 		board.initialize();
 		
-		cgui = new ControlGUI();
+		cgui = new ControlGUI(board);
+		pcards = new CardDisplay(board);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
 		setLayout(new BorderLayout());
-		setSize(625, 900);	
+		setSize(625, 930);	
 		add(board,BorderLayout.CENTER);
 		add(cgui,BorderLayout.SOUTH);
+		add(pcards,BorderLayout.EAST);
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());

@@ -184,13 +184,23 @@ public class Board extends JPanel{
 		
 		FileReader fr = new FileReader(playerConfigFile);
 		Scanner in = new Scanner(fr);
+		
+		int numPlayer = 0;		
+		
 		while(in.hasNextLine()){				
 			String[] strs = in.nextLine().split(", ");
 			if(strs.length != 4) throw new BadConfigFormatException("Improper number of parameters in playerData");
-			this.playerList.add( new Player(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
+			
+			if (numPlayer == 0)
+				this.playerList.add( new HumanPlayer(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
+			else
+				this.playerList.add( new ComputerPlayer(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
+			
+			
 			Card person = new Card(strs[0],CardType.PERSON);
 			this.cardDeck.add(person);
 			this.peopleDeck.add(person);
+			numPlayer++;
 		}
 		in.close();
 	}
