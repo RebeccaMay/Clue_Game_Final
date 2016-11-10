@@ -95,4 +95,17 @@ public class Player {
 	public String getPlayerName(){
 		return playerName;
 	}
+	
+	public int getRow(){
+		return row;
+	}
+	
+	public int getCol(){
+		return column;
+	}
+	
+	public void makeMove(Set<BoardCell> targets, int row, int col){		//row and col will be nothing
+		
+	}
+
 }

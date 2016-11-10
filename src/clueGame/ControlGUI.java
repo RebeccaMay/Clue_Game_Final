@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -153,5 +154,9 @@ public class ControlGUI extends JPanel{
 		jp.add(secCol);
 		jp.add(thirdCol);
 		return jp;
-	}	
+	}
+	
+	public void paintComponent(Graphics g){
+		txtfieldWhoseTurn.setText(b.getCurrentPlayer().getPlayerName());
+	}
 }

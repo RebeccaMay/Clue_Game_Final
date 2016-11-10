@@ -78,6 +78,11 @@ public class ComputerPlayer extends Player {
 		Solution givenSolution = new Solution(chosenPerson, chosenWeapon, roomString);
 		return givenSolution;
 		
-	}	
+	}
+	
+	@Override
+	public void makeMove(Set<BoardCell> targets, int row, int col){		//row and col will be nothing
+		pickLocation(targets);
+	}
 
 }

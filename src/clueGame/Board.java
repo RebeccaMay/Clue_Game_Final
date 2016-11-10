@@ -55,6 +55,9 @@ public class Board extends JPanel{
 	private ArrayList<Player> playerList;
 	private int currentPlayer = 0;
 	
+	private int rollNum;
+	private boolean humanDone = true;
+	
 	private Solution theAnswer;
 	
 	
@@ -609,10 +612,40 @@ public class Board extends JPanel{
 				board[i][j].draw(g);
 			}
 		}
+		if (currentPlayer == 0){
+			for (BoardCell b: targets){
+				b.draw(g, Color.CYAN);
+			}
+		}
 		
 		for(Player p: playerList){
 			p.draw(g);
 		}
 		repaint();
+	}
+	
+	public Player getCurrentPlayer(){
+		return playerList.get(currentPlayer);
+	}
+	
+	public int getRollNum(){
+		return rollNum;
+	}
+	
+	public void nextTurn(){
+		if(humanDone){
+			Random rand = new Random();
+			rollNum = rand.nextInt(5) + 1;
+			
+			calcTargets(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol(), rollNum);
+			
+			if (currentPlayer != 0){
+				playerList.get(currentPlayer).makeMove(targets, 0, 0);
+			}
+			else{
+				humanDone = false;
+			}
+			repaint();
+		}	
 	}
 }

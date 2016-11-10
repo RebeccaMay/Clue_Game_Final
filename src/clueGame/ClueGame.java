@@ -44,6 +44,7 @@ public class ClueGame extends JFrame{
 		
 		opPane.showMessageDialog(this, "You are " + plist.get(0).getPlayerName() + ", press Next Player to begin playing!");
 		
+		board.nextTurn();
 	}
 	
 	public static void main(String[] args) {		

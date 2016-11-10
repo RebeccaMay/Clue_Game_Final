@@ -112,4 +112,37 @@ public class BoardCell {
 		}
 		
 	}
+	
+	public void draw(Graphics g, Color c2){
+		g.setColor(c2);
+		g.fillRect(column*sideLength, row*sideLength, sideLength, sideLength);		
+		if(walkway == true){
+			g.setColor(Color.black);
+			g.drawRect(column*sideLength, row*sideLength, sideLength, sideLength);
+		}
+		if(doorway == true){
+			g.setColor(Color.blue);
+			switch(door){
+				case UP:
+					g.fillRect(column*sideLength, row*sideLength,sideLength,doorWidth);
+					break;
+				case DOWN:
+					g.fillRect(column*sideLength, (row+1)*sideLength-doorWidth,sideLength,doorWidth);
+					break;
+				case LEFT:
+					g.fillRect(column*sideLength, row*sideLength,doorWidth,sideLength);
+					break;
+				case RIGHT:
+					g.fillRect((column+1)*sideLength-doorWidth, row*sideLength,doorWidth,sideLength);
+					break;
+			}
+			
+		}
+		
+		if(roomName != ""){
+			g.setColor(Color.black);
+			g.drawString(roomName, column*sideLength, row*sideLength);
+		}
+		
+	}
 }
