@@ -3,6 +3,8 @@ package clueGame;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -62,6 +64,8 @@ public class ControlGUI extends JPanel{
 		secCol.add(new JPanel());
 		secCol.add(buttonNextPlayer);
 		secCol.add(new JPanel());
+		
+		buttonNextPlayer.addActionListener(new nextPlayerListener());
 
 		//Third column in row
 		JPanel thirdCol = new JPanel();
@@ -158,5 +162,11 @@ public class ControlGUI extends JPanel{
 	
 	public void paintComponent(Graphics g){
 		txtfieldWhoseTurn.setText(b.getCurrentPlayer().getPlayerName());
+	}
+	
+	private class nextPlayerListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			b.nextTurn();
+		}
 	}
 }

@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -77,6 +79,7 @@ public class Board extends JPanel{
 		dealingDeck = new HashSet<Card>();
 		theAnswer = new Solution();
 		this.setMinimumSize(new Dimension(400,400));
+		this.addMouseListener(new cellListener());
 	}
 
 	// Makes sure only one instance of Board can exist;
@@ -647,5 +650,22 @@ public class Board extends JPanel{
 			}
 			repaint();
 		}	
+	}
+	
+	private class cellListener implements MouseListener{
+
+		public void mouseClicked (MouseEvent event){
+			if (currentPlayer == 0){
+				int clickedRow = event.getY()/26;
+				int clickedCol = event.getX()/26;
+				playerList.get(currentPlayer).makeMove(targets, clickedRow, clickedCol);
+				
+			}
+		}
+
+		public void mouseEntered(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {	}
+		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {}
 	}
 }
