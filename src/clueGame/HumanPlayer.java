@@ -9,8 +9,9 @@ public class HumanPlayer extends Player {
 	}
 	
 	@Override
-	public void makeMove(Set<BoardCell> targets, int row, int col){
-		
+	public void makeMove(Set<BoardCell> targets, int r, int c){
+		row = r;
+		column = c;
 	}
 
 }
