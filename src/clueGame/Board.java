@@ -19,8 +19,10 @@ import java.util.Set;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -658,8 +660,13 @@ public class Board extends JPanel{
 			if (currentPlayer == 0){
 				int clickedRow = event.getY()/26;
 				int clickedCol = event.getX()/26;
-				playerList.get(currentPlayer).makeMove(targets, clickedRow, clickedCol);
-				
+				if(targets.contains(board[clickedRow][clickedCol])){
+					playerList.get(currentPlayer).makeMove(targets, clickedRow, clickedCol);
+				}
+				else{
+					JOptionPane error = new JOptionPane();
+					error.showMessageDialog(new JFrame(), "Invalid Cell Selected");
+				}
 			}
 		}
 
