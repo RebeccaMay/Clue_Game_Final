@@ -161,12 +161,14 @@ public class ControlGUI extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
-		txtfieldWhoseTurn.setText(b.getCurrentPlayer().getPlayerName());
+		
 	}
 	
 	private class nextPlayerListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			b.nextTurn();
+			txtfieldWhoseTurn.setText(b.getCurrentPlayer().getPlayerName());
+			txtfieldRoll.setText(Integer.toString(b.getRollNum()));
 		}
 	}
 }

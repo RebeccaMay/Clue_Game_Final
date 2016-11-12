@@ -57,7 +57,7 @@ public class Board extends JPanel{
 	private Set<Card> cardDeck;
 	private Set<Card> dealingDeck;
 	private ArrayList<Player> playerList;
-	private int currentPlayer = 0;
+	private int currentPlayer = -1; //starts at -1, so first click of NextTurn begins with human
 	
 	private int rollNum;
 	private boolean humanDone = true;
@@ -617,7 +617,7 @@ public class Board extends JPanel{
 				board[i][j].draw(g);
 			}
 		}
-		if (currentPlayer == 0){
+		if (currentPlayer == 0 && humanDone == false){
 			for (BoardCell b: targets){
 				b.draw(g, Color.CYAN);
 			}
@@ -639,6 +639,12 @@ public class Board extends JPanel{
 	
 	public void nextTurn(){
 		if(humanDone){
+			
+			if(currentPlayer < playerList.size() - 1)
+				currentPlayer++;
+			else
+				currentPlayer = 0;
+			
 			Random rand = new Random();
 			rollNum = rand.nextInt(5) + 1;
 			
@@ -651,17 +657,22 @@ public class Board extends JPanel{
 				humanDone = false;
 			}
 			repaint();
-		}	
+		}
+		else{
+			JOptionPane error = new JOptionPane();
+			error.showMessageDialog(new JFrame(), "Please finish your turn");
+		}
 	}
 	
 	private class cellListener implements MouseListener{
 
 		public void mouseClicked (MouseEvent event){
-			if (currentPlayer == 0){
+			if (currentPlayer == 0 && humanDone == false){
 				int clickedRow = event.getY()/26;
 				int clickedCol = event.getX()/26;
 				if(targets.contains(board[clickedRow][clickedCol])){
 					playerList.get(currentPlayer).makeMove(targets, clickedRow, clickedCol);
+					humanDone = true;
 				}
 				else{
 					JOptionPane error = new JOptionPane();
