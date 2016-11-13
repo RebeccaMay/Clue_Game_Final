@@ -654,7 +654,10 @@ public class Board extends JPanel{
 			if (currentPlayer != 0){
 				
 				if(compAccusation != null){
-					
+					if(checkAccusation(compAccusation)){
+						JOptionPane error = new JOptionPane();
+						error.showMessageDialog(new JFrame(), playerList.get(currentPlayer).getPlayerName() + " won the game!");
+					}
 				}
 				
 				playerList.get(currentPlayer).makeMove(targets, 0, 0);
@@ -669,20 +672,26 @@ public class Board extends JPanel{
 						for(Player p : playerList){
 							p.addToSeen(c);
 						}
+						
+						//moves accused player to room
+						for(Player p : playerList){
+							if(p.getPlayerName().equals(g.getPerson())){
+								p.forceMove(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol());
+							}
+						}
+						
+						
+						//displaye
+						dispGuess = g.getPerson() + " " + g.getRoom() + " " + g.getWeapon();
+						dispResponse = c.getCardName();
 					}
 					else{
+						//If Card c  was null, that means there was no card to disprove the suggestion
+						//thus it becomes the computer accusation
 						compAccusation = g;
 					}
 					
-					//moves accused player to room
-					for(Player p : playerList){
-						if(p.getPlayerName().equals(g.getPerson())){
-							p.forceMove(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol());
-						}
-					}
 					
-					dispGuess = g.getPerson() + " " + g.getRoom() + " " + g.getWeapon();
-					dispResponse = c.getCardName();
 				}
 				else{
 					dispGuess = "";
