@@ -17,6 +17,8 @@ public class guessDialog extends JDialog {
 	private Solution guess;
 	private JComboBox<String> weapons, rooms, people;
 	private boolean isAccusation;
+	private boolean submitted;
+	JButton submitButton;
 	
 	public guessDialog(Board b, boolean isAccustion){
 		this.isAccusation = isAccusation;
@@ -90,10 +92,9 @@ public class guessDialog extends JDialog {
 	public JPanel submitButton(){
 		JPanel submit = new JPanel();
 		submit.setLayout(new GridLayout(1,1));
-		JButton submitButton = new JButton("Submit");
+		submitButton = new JButton("Submit");
 		submit.add(submitButton);
-		
-		
+		submitButton.addActionListener(new submitActionListener());
 		return submit;
 	}
 	
@@ -101,20 +102,29 @@ public class guessDialog extends JDialog {
 		JPanel cancel = new JPanel();
 		cancel.setLayout(new GridLayout(1,1));
 		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new exitActionListener());
 		cancel.add(cancelButton);
 		return cancel;
 	}
 	
 	public class submitActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			
+			if (e.getSource() == submitButton){
+				submitted = true;
+			}
+			else{
+				submitted = false;
+			}
 		}
 	}
 	
-	public class exitActionListner implements ActionListener{
+	public class exitActionListener implements ActionListener{
 		public void actionPerfromed(ActionEvent e){
-			
+			System.exit(0);
 		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {}
 	}
 	
 	public Solution getSolution(){
