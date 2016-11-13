@@ -1,7 +1,10 @@
 package clueGame;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -11,9 +14,12 @@ import javax.swing.border.TitledBorder;
 
 public class guessDialog extends JDialog {
 	private Board currentBoard;
+	private Solution guess;
+	private JComboBox<String> weapons, rooms, people;
+	private boolean isAccusation;
 	
-	public guessDialog(Board b){
-		
+	public guessDialog(Board b, boolean isAccustion){
+		this.isAccusation = isAccusation;
 	}
 	
 	public JPanel person(){
@@ -27,7 +33,7 @@ public class guessDialog extends JDialog {
 	public JPanel personGuessPanel(){
 		JPanel personGuess = new JPanel();
 	
-		JComboBox<String> people = new JComboBox<String>();
+		people = new JComboBox<String>();
 		for(Player p: currentBoard.getPlayerList()){
 			people.addItem(p.getPlayerName());
 		}		
@@ -39,12 +45,27 @@ public class guessDialog extends JDialog {
 	public JPanel room(){
 		JPanel room = new JPanel();
 		room.setLayout(new GridLayout(1, 1));
-		JLabel roomLabel = new JLabel(currentBoard.getCurrentRoom(currentBoard.getCurrentPlayer()), JLabel.CENTER);
+		JLabel roomLabel = new JLabel("Your Room", JLabel.CENTER);
 		room.add(roomLabel);
 		return room;
 	}
 	
-	
+	public JPanel roomsGuessPanel(){
+		JPanel roomOption = new JPanel();
+		roomOption.setLayout(new GridLayout(1,1));
+		rooms = new JComboBox<String>();
+		
+		if(isAccusation){
+			for(Card c: currentBoard.getRoomDeck()){
+				rooms.addItem(c.getCardName());
+			}
+		}
+		else{
+			rooms.addItem(currentBoard.getCurrentRoom(currentBoard.getCurrentPlayer()));
+		}
+		roomOption.add(rooms);
+		return roomOption;
+	}
 	
 	public JPanel weapon(){
 		JPanel weapon = new JPanel();
@@ -56,7 +77,7 @@ public class guessDialog extends JDialog {
 	
 	public JPanel weaponsGuessPanel(){
 		JPanel weaponGuess = new JPanel();
-		JComboBox<String> weapons = new JComboBox<String>();
+		weapons = new JComboBox<String>();
 		
 		for(Card c: currentBoard.getWeaponDeck()){
 			weapons.addItem(c.getCardName());
@@ -64,5 +85,40 @@ public class guessDialog extends JDialog {
 		
 		weaponGuess.add(weapons);
 		return weaponGuess;
-	}	
+	}
+	
+	public JPanel submitButton(){
+		JPanel submit = new JPanel();
+		submit.setLayout(new GridLayout(1,1));
+		JButton submitButton = new JButton("Submit");
+		submit.add(submitButton);
+		
+		
+		return submit;
+	}
+	
+	public JPanel cancelButton(){
+		JPanel cancel = new JPanel();
+		cancel.setLayout(new GridLayout(1,1));
+		JButton cancelButton = new JButton("Cancel");
+		cancel.add(cancelButton);
+		return cancel;
+	}
+	
+	public class submitActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+		}
+	}
+	
+	public class exitActionListner implements ActionListener{
+		public void actionPerfromed(ActionEvent e){
+			
+		}
+	}
+	
+	public Solution getSolution(){
+		guess.setValues((String)people.getSelectedItem(), (String)weapons.getSelectedItem(), (String)rooms.getSelectedItem());
+		return guess;
+	}
 }
