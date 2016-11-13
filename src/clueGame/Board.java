@@ -738,4 +738,9 @@ public class Board extends JPanel{
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
 	}
+	
+	public String getCurrentRoom(Player current){
+		String room = rooms.get(board[current.getRow()][current.getCol()].getInitial());
+		return room;
+	}
 }
