@@ -22,6 +22,18 @@ public class guessDialog extends JDialog {
 	
 	public guessDialog(Board b, boolean isAccustion){
 		this.isAccusation = isAccusation;
+		this.currentBoard = b;
+		this.setLayout(new GridLayout(4,2));
+		this.setSize(500, 300);	
+		
+		this.add(person());
+		this.add(personGuessPanel());
+		this.add(room());
+		this.add(roomsGuessPanel());
+		this.add(weapon());
+		this.add(weaponsGuessPanel());
+		this.add(submitButton());
+		this.add(cancelButton());
 	}
 	
 	public JPanel person(){
@@ -81,6 +93,7 @@ public class guessDialog extends JDialog {
 		JPanel weaponGuess = new JPanel();
 		weapons = new JComboBox<String>();
 		
+		System.out.println(currentBoard.getWeaponDeck().size());
 		for(Card c: currentBoard.getWeaponDeck()){
 			weapons.addItem(c.getCardName());
 		}
@@ -119,12 +132,11 @@ public class guessDialog extends JDialog {
 	}
 	
 	public class exitActionListener implements ActionListener{
-		public void actionPerfromed(ActionEvent e){
-			System.exit(0);
-		}
-
+		
 		@Override
-		public void actionPerformed(ActionEvent e) {}
+		public void actionPerformed(ActionEvent e) {
+			
+		}
 	}
 	
 	public Solution getSolution(){

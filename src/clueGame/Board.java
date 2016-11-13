@@ -716,6 +716,7 @@ public class Board extends JPanel{
 		return dispResponse;
 	}
 	
+	
 	private class cellListener implements MouseListener{
 
 		public void mouseClicked (MouseEvent event){
@@ -725,6 +726,11 @@ public class Board extends JPanel{
 				if(targets.contains(board[clickedRow][clickedCol])){
 					playerList.get(currentPlayer).makeMove(targets, clickedRow, clickedCol);
 					humanDone = true;
+					
+					if(board[playerList.get(currentPlayer).getRow()][playerList.get(currentPlayer).getCol()].isRoom()){
+						JDialog jd = new guessDialog(getInstance(),false);
+						jd.setVisible(true);
+					}
 				}
 				else{
 					JOptionPane error = new JOptionPane();
