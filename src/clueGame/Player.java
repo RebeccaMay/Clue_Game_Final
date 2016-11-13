@@ -13,6 +13,8 @@ public class Player {
 	protected int row;
 	protected int column;
 	private Color color;
+	protected Solution guess;
+	protected boolean suggestionTrue;
 	
 	protected Set<Card> myCards;
 	protected Set<Card> seenCards;
@@ -106,6 +108,19 @@ public class Player {
 	
 	public void makeMove(Set<BoardCell> targets, int row, int col){		//row and col will be nothing
 		
+	}
+	
+	public Solution getGuess(){
+		return guess;
+	}
+	
+	public void addToSeen(Card c){
+		seenCards.add(c);
+	}
+	
+	public void forceMove(int r, int c){
+		row = r;
+		column = c;
 	}
 
 }

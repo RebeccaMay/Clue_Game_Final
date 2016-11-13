@@ -169,6 +169,8 @@ public class ControlGUI extends JPanel{
 			b.nextTurn();
 			txtfieldWhoseTurn.setText(b.getCurrentPlayer().getPlayerName());
 			txtfieldRoll.setText(Integer.toString(b.getRollNum()));
+			txtfieldGuess.setText(b.getGuessStr());
+			txtfieldResponse.setText(b.getResponseStr());
 		}
 	}
 }

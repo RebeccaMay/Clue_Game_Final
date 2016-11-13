@@ -61,9 +61,11 @@ public class Board extends JPanel{
 	
 	private int rollNum;
 	private boolean humanDone = true;
+	private String dispGuess;
+	private String dispResponse;
 	
 	private Solution theAnswer;
-	
+	private Solution compAccusation;
 	
 	
 	// Private Constructor. Initializes data structures.
@@ -597,7 +599,6 @@ public class Board extends JPanel{
 	
 	//This function only is used for testing
 	public void forceSetPlayerList(ArrayList<Player> testPlayerList) {
-		// TODO Auto-generated method stub
 		this.playerList.clear();
 		for(Player p: testPlayerList) {
 			this.playerList.add(p);
@@ -651,7 +652,42 @@ public class Board extends JPanel{
 			calcTargets(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol(), rollNum);
 			
 			if (currentPlayer != 0){
+				
+				if(compAccusation != null){
+					
+				}
+				
 				playerList.get(currentPlayer).makeMove(targets, 0, 0);
+				
+				//makes suggestion if in room
+				if(board[playerList.get(currentPlayer).getRow()][playerList.get(currentPlayer).getCol()].isRoom()){
+					Solution g = playerList.get(currentPlayer).getGuess();
+					Card c = handleSuggestion(g);
+					
+					//adds card that disproved guess to players seenCards
+					if(c != null){
+						for(Player p : playerList){
+							p.addToSeen(c);
+						}
+					}
+					else{
+						compAccusation = g;
+					}
+					
+					//moves accused player to room
+					for(Player p : playerList){
+						if(p.getPlayerName().equals(g.getPerson())){
+							p.forceMove(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol());
+						}
+					}
+					
+					dispGuess = g.getPerson() + " " + g.getRoom() + " " + g.getWeapon();
+					dispResponse = c.getCardName();
+				}
+				else{
+					dispGuess = "";
+					dispResponse = "";
+				}
 			}
 			else{
 				humanDone = false;
@@ -662,6 +698,13 @@ public class Board extends JPanel{
 			JOptionPane error = new JOptionPane();
 			error.showMessageDialog(new JFrame(), "Please finish your turn");
 		}
+	}
+	
+	String getGuessStr(){
+		return dispGuess;
+	}
+	String getResponseStr(){
+		return dispResponse;
 	}
 	
 	private class cellListener implements MouseListener{
