@@ -46,7 +46,7 @@ public class ComputerPlayer extends Player {
 		peopleDeck.addAll(Board.getInstance().getPeopleDeck());
 		
 		Set<Card> weaponDeck = new HashSet<Card>();
-		weaponDeck = Board.getInstance().getWeaponDeck();
+		weaponDeck.addAll(Board.getInstance().getWeaponDeck());
 		
 		Set<Card> seenPeople = new HashSet<Card>();
 		Set<Card> seenWeapons = new HashSet<Card>();
