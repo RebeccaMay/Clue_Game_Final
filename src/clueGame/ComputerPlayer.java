@@ -42,8 +42,12 @@ public class ComputerPlayer extends Player {
 	}
 
 	public Solution createSuggestion() {
-		Set<Card> peopleDeck = Board.getInstance().getPeopleDeck();
-		Set<Card> weaponDeck = Board.getInstance().getWeaponDeck();
+		Set<Card> peopleDeck = new HashSet<Card>();
+		peopleDeck.addAll(Board.getInstance().getPeopleDeck());
+		
+		Set<Card> weaponDeck = new HashSet<Card>();
+		weaponDeck = Board.getInstance().getWeaponDeck();
+		
 		Set<Card> seenPeople = new HashSet<Card>();
 		Set<Card> seenWeapons = new HashSet<Card>();
 		for (Card c: seenCards) {
