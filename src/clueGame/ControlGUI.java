@@ -75,6 +75,8 @@ public class ControlGUI extends JPanel{
 		thirdCol.add(buttonMakeAccusation);
 		thirdCol.add(new JPanel());
 
+		buttonMakeAccusation.addActionListener(new accusationListener());
+		
 		//adds the columns to the top row
 		jp.add(firstCol);
 		jp.add(secCol);
@@ -170,6 +172,12 @@ public class ControlGUI extends JPanel{
 	private class nextPlayerListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			b.nextTurn();
+		}
+	}
+	
+	private class accusationListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			b.makeAccusation();
 		}
 	}
 }

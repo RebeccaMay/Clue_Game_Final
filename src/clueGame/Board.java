@@ -43,7 +43,7 @@ public class Board extends JPanel{
 	private Map<BoardCell, Set<BoardCell>> adjMatrix;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
-	
+
 
 	private String boardConfigFile;
 	private String roomConfigFile;
@@ -59,19 +59,21 @@ public class Board extends JPanel{
 	private Set<Card> dealingDeck;
 	private ArrayList<Player> playerList;
 	private int currentPlayer = -1; //starts at -1, so first click of NextTurn begins with human
-	
+
 	private int rollNum;
 	private boolean humanDone = true;
 	private String dispGuess = "";
 	private String dispResponse = "";
 	private String dispName = "";
 	private String dispRoll = "";
-	
+
 	private Solution theAnswer;
 	private Solution compAccusation;
-	
+
 	private ControlGUI cg;
 	
+	private boolean madeAccusation = false;
+
 	// Private Constructor. Initializes data structures.
 	private Board() {
 		// Singleton
@@ -88,7 +90,7 @@ public class Board extends JPanel{
 		theAnswer = new Solution();
 		this.setMinimumSize(new Dimension(400,400));
 		this.addMouseListener(new cellListener());
-		
+
 		cg = new ControlGUI(this);
 	}
 
@@ -110,7 +112,7 @@ public class Board extends JPanel{
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
 		}
-		
+
 		try{
 			loadPeopleConfig();
 		}
@@ -120,7 +122,7 @@ public class Board extends JPanel{
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		try{
 			loadWeaponConfig();
 		}
@@ -130,7 +132,7 @@ public class Board extends JPanel{
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		try{
 			loadRoomNameLayout();
 		}
@@ -140,7 +142,7 @@ public class Board extends JPanel{
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		calcAdjacencies();
 		createSolution();
 		dealCards();
@@ -197,22 +199,22 @@ public class Board extends JPanel{
 	//loads people, adds to playerList and adds people cards to deck
 	public void loadPeopleConfig() throws BadConfigFormatException, FileNotFoundException{
 		this.playerList = new ArrayList<Player>();
-		
+
 		FileReader fr = new FileReader(playerConfigFile);
 		Scanner in = new Scanner(fr);
-		
+
 		int numPlayer = 0;		
-		
+
 		while(in.hasNextLine()){				
 			String[] strs = in.nextLine().split(", ");
 			if(strs.length != 4) throw new BadConfigFormatException("Improper number of parameters in playerData");
-			
+
 			if (numPlayer == 0)
 				this.playerList.add( new HumanPlayer(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
 			else
 				this.playerList.add( new ComputerPlayer(strs[0], strs[1],Integer.parseInt(strs[2]),Integer.parseInt(strs[3])));
-			
-			
+
+
 			Card person = new Card(strs[0],CardType.PERSON);
 			this.cardDeck.add(person);
 			this.peopleDeck.add(person);
@@ -220,8 +222,8 @@ public class Board extends JPanel{
 		}
 		in.close();
 	}
-	
-	
+
+
 	//loads weapons, places weapon cards within cardDeck
 	public void loadRoomNameLayout() throws BadConfigFormatException, FileNotFoundException{		
 		FileReader fr = new FileReader(roomNameLayoutFile);
@@ -229,16 +231,16 @@ public class Board extends JPanel{
 		while(in.hasNextLine()){				
 			String[] strs = in.nextLine().split(", ");
 			if(strs.length != 3) throw new BadConfigFormatException("Improper number of parameters in roomNameLayout");
-			
+
 			String name = strs[0];
 			int row = Integer.parseInt(strs[1]);
 			int col = Integer.parseInt(strs[2]);
-					
+
 			board[row][col].setRoomName(name);
 		}
 		in.close();
 	}
-	
+
 	//loads weapons, places weapon cards within cardDeck
 	public void loadWeaponConfig() throws BadConfigFormatException, FileNotFoundException{		
 		FileReader fr = new FileReader(weaponConfigFile);
@@ -250,7 +252,7 @@ public class Board extends JPanel{
 		}
 		in.close();
 	}
-	
+
 	// Takes the board config file and loads cells into the board
 	public void loadBoardConfig() throws BadConfigFormatException {
 		// Reads in the file into a string
@@ -375,7 +377,7 @@ public class Board extends JPanel{
 					}
 				}
 				adjMatrix.put(board[i][j], temp);
-				
+
 			}
 		}
 	}
@@ -387,20 +389,20 @@ public class Board extends JPanel{
 
 	// Calculates all targets for a cell given r, c and the length of the path
 	public void calcTargets(int r, int c, int pathLength) {
-		
+
 		// Clears out targets and visited cells list
 		visited.clear();
 		targets.clear();
-		
+
 		// Gets the starting point cell, saves as start
 		BoardCell start = getCellAt(r, c);
-		
+
 		// Adds starting point to visited list
 		visited.add(start);
 		// Calls findAllTargets for the given start and path length
 		// (recursive function)
 		findAllTargets(start, pathLength);
-		
+
 		return;
 	}
 
@@ -419,15 +421,15 @@ public class Board extends JPanel{
 
 		return;
 	}
-	
+
 	public void findAllTargets(BoardCell cell, int pathLength){
-		
+
 		// Gets the adjacency list for the current cell
 		Set<BoardCell> adjList;
 		adjList = adjMatrix.get(cell);
-		
+
 		for (BoardCell adjCell: adjList){
-			
+
 			// If cell is already visited continue to next cell
 			if (visited.contains(adjCell)) {
 				// Skip the rest
@@ -452,8 +454,8 @@ public class Board extends JPanel{
 			// Remove cell from visited list
 			visited.remove(adjCell);
 		}
-		
-		
+
+
 		return;
 	}
 
@@ -492,7 +494,7 @@ public class Board extends JPanel{
 	public BoardCell getCellAt(int row, int col) {
 		return board[row][col];
 	}
-	
+
 	//Function that pulls 1 card of each type out of the deck to be the solution to the game
 	//The set called dealingDeck will no longer be a deck including all of the cards
 	public void createSolution(){
@@ -530,7 +532,7 @@ public class Board extends JPanel{
 			}
 			counter++;
 		}
-		
+
 		theAnswer.setValues(person, weapon, room);
 	}
 
@@ -539,18 +541,18 @@ public class Board extends JPanel{
 		int playerNum = 0;
 		for (Card c: this.dealingDeck){
 			this.playerList.get(playerNum).giveCard(c);
-			
+
 			playerNum++;
 			if(playerNum >= 6) playerNum = 0;
 		}
 	}
-	
+
 	//Function that compares a players acccusation to the solution
 	//if this is correct, the player wins the game
 	public boolean checkAccusation(Solution accusation){
 		return theAnswer.check(accusation);
 	}
-	
+
 	//Will loop through each player until one can disprove the suggestion (if someone can)
 	public Card handleSuggestion(Solution solution) {
 		//Loop runs for the size of the player list
@@ -565,13 +567,13 @@ public class Board extends JPanel{
 		}
 		return null;
 	}
-	
+
 	//This getter is for testing only
 	public Set<Card> getDeck(){
 		return this.cardDeck;
 	}
-	
-	
+
+
 	public ArrayList<Player> getPlayerList(){
 		return this.playerList;
 	}
@@ -598,11 +600,11 @@ public class Board extends JPanel{
 	public Set<Card> getRoomDeck() {
 		return roomDeck;
 	}
-	
+
 	public Map<Character, String> getRoomMap() {
 		return rooms;
 	}
-	
+
 	//This function only is used for testing
 	public void forceSetPlayerList(ArrayList<Player> testPlayerList) {
 		this.playerList.clear();
@@ -614,11 +616,11 @@ public class Board extends JPanel{
 	public void setCurrentPlayer(int currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
-	
-	
+
+
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
+
 		for (int i=0;i<numRows;i++){
 			for (int j=0;j<numColumns;j++){
 				board[i][j].draw(g);
@@ -629,13 +631,13 @@ public class Board extends JPanel{
 				b.draw(g, Color.CYAN);
 			}
 		}
-		
+
 		for(Player p: playerList){
 			p.draw(g);
 		}
 		repaint();
 	}
-	
+
 	public Player getCurrentPlayer(){
 		return playerList.get(currentPlayer);
 	}
@@ -645,53 +647,59 @@ public class Board extends JPanel{
 	public String getRollNum(){
 		return dispRoll;
 	}
-	
+
 	public void nextTurn(){
 		if(humanDone){
-			
+
 			if(currentPlayer < playerList.size() - 1)
 				currentPlayer++;
 			else
 				currentPlayer = 0;
-			
+
 			dispName = this.getCurrentPlayer().getPlayerName();
-			
+
 			Random rand = new Random();
 			rollNum = rand.nextInt(5) + 1;
 			dispRoll = Integer.toString(rollNum);
-			
+
 			calcTargets(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol(), rollNum);
-			
+
 			if (currentPlayer != 0){
-				
+
 				if(compAccusation != null){
 					if(checkAccusation(compAccusation)){
 						JOptionPane error = new JOptionPane();
-						error.showMessageDialog(new JFrame(), playerList.get(currentPlayer).getPlayerName() + " won the game!");
+						error.showMessageDialog(new JFrame(), compAccusation.getPerson() + " " + compAccusation.getWeapon() + " " +
+								compAccusation.getRoom() + ", " + playerList.get(currentPlayer).getPlayerName() + " won the game!");
+						System.exit(0);
+					}
+					else{
+						JOptionPane error = new JOptionPane();
+						error.showMessageDialog(new JFrame(), playerList.get(currentPlayer).getPlayerName() + "'s accusation was incorrect!");
 					}
 				}
-				
+
 				playerList.get(currentPlayer).makeMove(targets, 0, 0);
-				
+
 				//makes suggestion if in room
 				if(board[playerList.get(currentPlayer).getRow()][playerList.get(currentPlayer).getCol()].isRoom()){
 					Solution g = playerList.get(currentPlayer).getGuess();
 					Card c = handleSuggestion(g);
-					
+
 					//adds card that disproved guess to players seenCards
 					if(c != null){
 						for(Player p : playerList){
 							p.addToSeen(c);
 						}
-						
+
 						//moves accused player to room
 						for(Player p : playerList){
 							if(p.getPlayerName().equals(g.getPerson())){
 								p.forceMove(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol());
 							}
 						}
-						
-						
+
+
 						//displays the guess
 						dispGuess = g.getPerson() + " " + g.getRoom() + " " + g.getWeapon();
 						dispResponse = c.getCardName();
@@ -699,10 +707,12 @@ public class Board extends JPanel{
 					else{
 						//If Card c  was null, that means there was no card to disprove the suggestion
 						//thus it becomes the computer accusation
+						JOptionPane error = new JOptionPane();
+						error.showMessageDialog(new JFrame(), "No new clue!");
 						compAccusation = g;
 					}
-					
-					
+
+
 				}
 				else{				
 					dispGuess = "";
@@ -719,15 +729,15 @@ public class Board extends JPanel{
 			error.showMessageDialog(new JFrame(), "Please finish your turn");
 		}
 	}
-	
+
 	String getGuessStr(){
 		return dispGuess;
 	}
 	String getResponseStr(){
 		return dispResponse;
 	}
-	
-	
+
+
 	private class cellListener implements MouseListener{
 
 		public void mouseClicked (MouseEvent event){
@@ -737,33 +747,40 @@ public class Board extends JPanel{
 				if(targets.contains(board[clickedRow][clickedCol])){
 					playerList.get(currentPlayer).makeMove(targets, clickedRow, clickedCol);
 					humanDone = true;
+					madeAccusation = false;
 					
 					if(board[playerList.get(currentPlayer).getRow()][playerList.get(currentPlayer).getCol()].isRoom()){
 						guessDialog jd = new guessDialog(getInstance(),"Guess",false);
 						jd.setModal(true);
 						jd.setVisible(true);
-						
+
 						if(jd.getSumbitted()){
 							Solution g = jd.getSolution();
 							Card c = handleSuggestion(g);
-							
+
 							//adds card that disproved guess to players seenCards
 							if(c != null){
 								for(Player p : playerList){
 									p.addToSeen(c);
 								}
-								
+
 								//moves accused player to room
 								for(Player p : playerList){
 									if(p.getPlayerName().equals(g.getPerson())){
 										p.forceMove(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol());
 									}
 								}
-								
-								
+
+
 								//displays the guess
 								dispGuess = g.getPerson() + " " + g.getRoom() + " " + g.getWeapon();
 								dispResponse = c.getCardName();
+							}
+							else{
+								compAccusation = g;
+								
+								JOptionPane error = new JOptionPane();
+								error.showMessageDialog(new JFrame(), "No new clue!");
 							}
 						}						
 					}
@@ -781,13 +798,46 @@ public class Board extends JPanel{
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
 	}
-	
+
 	public String getCurrentRoom(Player current){
 		String room = rooms.get(board[current.getRow()][current.getCol()].getInitial());
 		return room;
 	}
-	
+
 	public void setCG(ControlGUI c){
 		cg=c;
 	}
+
+	public void makeAccusation(){
+		if (currentPlayer == 0 && humanDone == false && madeAccusation == false){
+			guessDialog jd = new guessDialog(getInstance(),"Make Accusation",true);
+			jd.setModal(true);
+			jd.setVisible(true);
+
+			if(jd.getSumbitted()){
+				Solution g = jd.getSolution();
+				Card c = handleSuggestion(g);
+
+				if(checkAccusation(g)){
+					JOptionPane error = new JOptionPane();
+					error.showMessageDialog(new JFrame(),"You won the game!");
+					System.exit(0);
+				}
+				else{
+					JOptionPane error = new JOptionPane();
+					error.showMessageDialog(new JFrame(), "Your accusation was incorrect");
+					humanDone = true;
+					nextTurn();
+				}
+				dispGuess = "";
+				dispResponse = "";
+				madeAccusation = true;
+			}
+		}
+		else if(currentPlayer != 0){
+			JOptionPane error = new JOptionPane();
+			error.showMessageDialog(new JFrame(), "It is not your turn!");
+		}
+	}
+
 }
