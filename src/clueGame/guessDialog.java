@@ -46,7 +46,7 @@ public class guessDialog extends JDialog {
 	
 	public JPanel personGuessPanel(){
 		JPanel personGuess = new JPanel();
-	
+		personGuess.setLayout(new GridLayout(1,1));
 		people = new JComboBox<String>();
 		for(Player p: currentBoard.getPlayerList()){
 			people.addItem(p.getPlayerName());
@@ -91,9 +91,9 @@ public class guessDialog extends JDialog {
 	
 	public JPanel weaponsGuessPanel(){
 		JPanel weaponGuess = new JPanel();
+		weaponGuess.setLayout(new GridLayout(1,1));
 		weapons = new JComboBox<String>();
 		
-		System.out.println(currentBoard.getWeaponDeck().size());
 		for(Card c: currentBoard.getWeaponDeck()){
 			weapons.addItem(c.getCardName());
 		}
