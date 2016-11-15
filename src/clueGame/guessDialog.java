@@ -19,8 +19,10 @@ public class guessDialog extends JDialog {
 	private boolean isAccusation;
 	private boolean submitted;
 	JButton submitButton;
+	guessDialog gd = this;
 	
-	public guessDialog(Board b, boolean isAccustion){
+	public guessDialog(Board b, String title, boolean isAccusation){
+		
 		this.isAccusation = isAccusation;
 		this.currentBoard = b;
 		this.setLayout(new GridLayout(4,2));
@@ -34,6 +36,8 @@ public class guessDialog extends JDialog {
 		this.add(weaponsGuessPanel());
 		this.add(submitButton());
 		this.add(cancelButton());
+		
+		guess = new Solution();
 	}
 	
 	public JPanel person(){
@@ -128,6 +132,7 @@ public class guessDialog extends JDialog {
 			else{
 				submitted = false;
 			}
+			gd.setVisible(false);
 		}
 	}
 	
@@ -135,12 +140,16 @@ public class guessDialog extends JDialog {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			gd.setVisible(false);
 		}
 	}
 	
 	public Solution getSolution(){
 		guess.setValues((String)people.getSelectedItem(), (String)weapons.getSelectedItem(), (String)rooms.getSelectedItem());
 		return guess;
+	}
+	
+	public boolean getSumbitted(){
+		return submitted;
 	}
 }

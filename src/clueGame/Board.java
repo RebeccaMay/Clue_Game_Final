@@ -43,6 +43,7 @@ public class Board extends JPanel{
 	private Map<BoardCell, Set<BoardCell>> adjMatrix;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
+	
 
 	private String boardConfigFile;
 	private String roomConfigFile;
@@ -681,7 +682,7 @@ public class Board extends JPanel{
 						}
 						
 						
-						//displaye
+						//displays the guess
 						dispGuess = g.getPerson() + " " + g.getRoom() + " " + g.getWeapon();
 						dispResponse = c.getCardName();
 					}
@@ -693,7 +694,7 @@ public class Board extends JPanel{
 					
 					
 				}
-				else{
+				else{				
 					dispGuess = "";
 					dispResponse = "";
 				}
@@ -728,9 +729,36 @@ public class Board extends JPanel{
 					humanDone = true;
 					
 					if(board[playerList.get(currentPlayer).getRow()][playerList.get(currentPlayer).getCol()].isRoom()){
-						JDialog jd = new guessDialog(getInstance(),false);
+						guessDialog jd = new guessDialog(getInstance(),"Guess",false);
+						jd.setModal(true);
 						jd.setVisible(true);
+						
+						if(jd.getSumbitted()){
+							Solution g = jd.getSolution();
+							Card c = handleSuggestion(g);
+							
+							//adds card that disproved guess to players seenCards
+							if(c != null){
+								for(Player p : playerList){
+									p.addToSeen(c);
+								}
+								
+								//moves accused player to room
+								for(Player p : playerList){
+									if(p.getPlayerName().equals(g.getPerson())){
+										p.forceMove(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol());
+									}
+								}
+								
+								
+								//displays the guess
+								dispGuess = g.getPerson() + " " + g.getRoom() + " " + g.getWeapon();
+								dispResponse = c.getCardName();
+							}
+						}						
 					}
+					getInstance().repaint();
+					System.out.println(dispGuess);
 				}
 				else{
 					JOptionPane error = new JOptionPane();
