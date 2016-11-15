@@ -27,7 +27,7 @@ public class ControlGUI extends JPanel{
 	
 	ControlGUI(Board b){
 		this.b = b;
-		
+		b.setCG(this);
 		//GUI code
 		setLayout(new GridLayout(2,1));
 		JPanel topRow = createTopRow();
@@ -161,16 +161,15 @@ public class ControlGUI extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
-		
+		txtfieldWhoseTurn.setText(b.getCurrentPlayerName());
+		txtfieldRoll.setText(b.getRollNum());
+		txtfieldGuess.setText(b.getGuessStr());
+		txtfieldResponse.setText(b.getResponseStr());
 	}
 	
 	private class nextPlayerListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			b.nextTurn();
-			txtfieldWhoseTurn.setText(b.getCurrentPlayer().getPlayerName());
-			txtfieldRoll.setText(Integer.toString(b.getRollNum()));
-			txtfieldGuess.setText(b.getGuessStr());
-			txtfieldResponse.setText(b.getResponseStr());
 		}
 	}
 }

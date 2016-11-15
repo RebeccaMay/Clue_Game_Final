@@ -62,12 +62,15 @@ public class Board extends JPanel{
 	
 	private int rollNum;
 	private boolean humanDone = true;
-	private String dispGuess;
-	private String dispResponse;
+	private String dispGuess = "";
+	private String dispResponse = "";
+	private String dispName = "";
+	private String dispRoll = "";
 	
 	private Solution theAnswer;
 	private Solution compAccusation;
 	
+	private ControlGUI cg;
 	
 	// Private Constructor. Initializes data structures.
 	private Board() {
@@ -85,6 +88,8 @@ public class Board extends JPanel{
 		theAnswer = new Solution();
 		this.setMinimumSize(new Dimension(400,400));
 		this.addMouseListener(new cellListener());
+		
+		cg = new ControlGUI(this);
 	}
 
 	// Makes sure only one instance of Board can exist;
@@ -634,9 +639,11 @@ public class Board extends JPanel{
 	public Player getCurrentPlayer(){
 		return playerList.get(currentPlayer);
 	}
-	
-	public int getRollNum(){
-		return rollNum;
+	public String getCurrentPlayerName(){
+		return dispName;
+	}
+	public String getRollNum(){
+		return dispRoll;
 	}
 	
 	public void nextTurn(){
@@ -647,8 +654,11 @@ public class Board extends JPanel{
 			else
 				currentPlayer = 0;
 			
+			dispName = this.getCurrentPlayer().getPlayerName();
+			
 			Random rand = new Random();
 			rollNum = rand.nextInt(5) + 1;
+			dispRoll = Integer.toString(rollNum);
 			
 			calcTargets(playerList.get(currentPlayer).getRow(), playerList.get(currentPlayer).getCol(), rollNum);
 			
@@ -757,8 +767,7 @@ public class Board extends JPanel{
 							}
 						}						
 					}
-					getInstance().repaint();
-					System.out.println(dispGuess);
+					cg.repaint();
 				}
 				else{
 					JOptionPane error = new JOptionPane();
@@ -776,5 +785,9 @@ public class Board extends JPanel{
 	public String getCurrentRoom(Player current){
 		String room = rooms.get(board[current.getRow()][current.getCol()].getInitial());
 		return room;
+	}
+	
+	public void setCG(ControlGUI c){
+		cg=c;
 	}
 }
